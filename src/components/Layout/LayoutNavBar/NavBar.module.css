@@ -1,0 +1,37 @@
+.Div {
+  @apply sticky top-0 z-50;
+}
+.Nav {
+  @apply LightGradientRev opacity-95;
+  @apply h-19.5;
+  @apply flex flex-wrap items-center justify-between px-0 py-2 transition-all shadow-none ease-soft-in  lg:flex-nowrap lg:justify-start;
+}
+.Div2 {
+  @apply flex items-center justify-between w-full px-4 py-1 mx-auto rounded-2xl flex-wrap-inherit transition-all;
+}
+.Div3 {
+  @apply flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto;
+}
+.Ul {
+  @apply flex flex-row justify-end pl-0 mb-0 list-none lg:w-full px-4;
+}
+.Li {
+  @apply flex items-center px-4;
+}
+.Link {
+  @apply block px-0 py-2 font-semibold transition-all;
+  @apply text-sm  text-darks-primary;
+}
+.Span {
+  @apply hidden sm:inline;
+}
+.Link2 {
+  @apply p-0 transition-all;
+  @apply text-sm  text-darks-primary;
+}
+.CogIcon {
+  @apply cursor-pointer;
+}
+.Main {
+  @apply ease-soft-in-out relative h-full max-h-screen rounded-xl transition-all duration-200;
+}

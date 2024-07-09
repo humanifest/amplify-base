@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Run npm lint
+npm run lint
+
+# Check the exit status of the npm lint command
+if [ $? -ne 0 ]; then
+  echo "Linting failed. Commit aborted."
+  exit 1
+fi
+
+exit 0

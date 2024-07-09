@@ -1,0 +1,18 @@
+.aside {
+  @apply z-990 fixed inset-y-0  block w-full -translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 p-0 antialiased shadow-none transition-transform duration-200 xl:left-0 xl:translate-x-0 xl:bg-transparent max-w-24;
+}
+
+.asideExpanded {
+  @apply aside;
+  @apply max-w-62.5;
+}
+
+.div {
+  @apply items-center block w-auto max-h-screen overflow-visible h-sidenav grow basis-full pt-3;
+}
+.ul {
+  @apply flex flex-col pl-0 mb-0;
+}
+.close {
+  @apply absolute m-8 bottom-0;
+}

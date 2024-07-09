@@ -1,0 +1,12 @@
+.BaseStyles {
+  @apply justify-center items-center max-w-6xl m-auto text-center;
+  @apply min-h-85-screen;
+}
+
+.Main {
+  @apply BaseStyles;
+}
+
+.Wide {
+  @apply BaseStyles min-w-full;
+}

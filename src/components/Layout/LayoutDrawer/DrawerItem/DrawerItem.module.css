@@ -1,0 +1,42 @@
+.active {
+  @apply fill-lights-primary;
+  @apply text-darks-secondary;
+}
+
+.li {
+  @apply m-0.5 w-full;
+}
+
+.span {
+  @apply ml-1 pointer-events-none text-sm font-semibold;
+  @apply outlined-text-light;
+  @apply text-darks-primary;
+}
+.spanCurrent {
+  @apply span;
+  @apply active;
+}
+
+.item {
+  @apply mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5;
+  @apply shadow-soft-2xl LightGradient;
+}
+.itemCurrent {
+  @apply item;
+  @apply MidMidsRev;
+}
+.icon {
+  @apply fill-darks-primary;
+}
+.iconCurrent {
+  @apply icon;
+  @apply active;
+}
+
+.Link {
+  @apply py-2.7 text-base my-0 mx-4 flex items-center whitespace-nowrap rounded-lg px-4 transition-colors ease-soft;
+}
+.LinkCurrent {
+  @apply Link;
+  @apply shadow-inner;
+}

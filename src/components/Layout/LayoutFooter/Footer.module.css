@@ -1,0 +1,35 @@
+.main {
+  @apply pb-10;
+}
+
+.li {
+  @apply inline-block;
+  @apply m-auto;
+}
+.link {
+  @apply block px-4 pt-0 pb-1 pr-0 font-normal transition-colors ease-soft-in-out text-sm text-mids-primary;
+}
+
+.footer {
+  @apply LightGradientRev fixed inset-x-0 bottom-0;
+  @apply bg-white/90;
+}
+.div {
+  @apply w-full px-6 mx-auto;
+}
+.div2 {
+  @apply flex flex-wrap items-center -mx-3 lg:justify-between;
+}
+.div3 {
+  @apply w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none;
+}
+.div4 {
+  @apply leading-normal text-center text-sm text-mids-primary lg:text-left;
+}
+.div5 {
+  @apply w-full  px-3 mt-0 shrink-0;
+  @apply lg:w-1/2 lg:flex-none lg:max-w-80;
+}
+.ul {
+  @apply flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end;
+}

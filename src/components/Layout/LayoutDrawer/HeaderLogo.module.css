@@ -1,0 +1,12 @@
+.div {
+  @apply h-19.5;
+}
+.Link {
+  @apply block px-8 py-6 m-0 text-sm whitespace-nowrap;
+}
+.img {
+  @apply inline shadow-soft-2xl mr-2 h-full max-w-full transition-all duration-100  max-h-8 rounded-2xl;
+}
+.span {
+  @apply ml-1 font-semibold stroke-darks-secondary text-darks-secondary;
+}

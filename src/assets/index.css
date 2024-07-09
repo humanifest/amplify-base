@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Cursive";
+  src: url("./fonts/Beau_Rivage/BeauRivage-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer base {
+  div {
+    @apply text-darks-primary;
+  }
+  a {
+    @apply text-mids-secondary font-semibold;
+  }
+}
+
+@layer utilities {
+  .cursive {
+    font-family: "Cursive";
+  }
+
+  .transform3d {
+    transform: "perspective(999px) rotateX(0deg) translateZ(0)";
+  }
+
+  .transform3d-hover {
+    transform: "perspective(999px) rotateX(7deg) translate3d(0,-4px,5px)";
+  }
+
+  .transform-dropdown {
+    transform: "perspective(999px) rotateX(-10deg) translateZ(0) translate3d(0,37px,0)";
+  }
+
+  .transform-dropdown-show {
+    transform: "perspective(999px) rotateX(0deg) translateZ(0) translate3d(0,37px,5px)";
+  }
+
+  .flex-wrap-inherit {
+    flex-wrap: inherit;
+  }
+
+  .visualDev {
+    /* In order to distinguish some environments from others visually */
+    @apply border-2 border-b-green-400;
+  }
+
+  .LightGradient {
+    @apply bg-gradient-to-tl from-lights-primary to-lights-secondary;
+  }
+  .LightGradientRev {
+    @apply bg-gradient-to-tl from-lights-secondary to-lights-primary;
+  }
+
+  .LightMids {
+    @apply bg-gradient-to-tl from-lights-primary to-mids-secondary;
+  }
+  .MidMids {
+    @apply bg-gradient-to-tl from-mids-secondary to-mids-primary;
+  }
+  .MidMidsRev {
+    @apply bg-gradient-to-br from-mids-secondary to-mids-primary;
+  }
+  .DarkMids {
+    @apply bg-gradient-to-br from-mids-secondary to-darks-primary;
+  }
+  .DarkMidsRev {
+    @apply bg-gradient-to-tl from-mids-secondary to-darks-primary;
+  }
+
+  .DarkGradient {
+    @apply bg-gradient-to-tr from-darks-primary to-darks-secondary;
+  }
+  .DarkGradientRev {
+    @apply bg-gradient-to-tr from-darks-secondary to-darks-primary;
+  }
+
+  .outlined-text-light {
+    /* TODO   standardize */
+    @apply drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,.8)];
+  }
+
+  .outlined-text-dark {
+    @apply drop-shadow-[0_1.2px_1.2px_rgba(45,55,72,1)];
+  }
+}

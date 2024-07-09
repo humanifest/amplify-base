@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/src/*": ["src/*"],
+      "_tw/*": ["tailwindcss/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -18,8 +25,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["vite/client"]
   },
-  "include": ["src"],
+  "include": ["src", "tailwindcss", "postcss/config.js"],
+  "exclude": ["amplify/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

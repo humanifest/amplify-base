@@ -1,0 +1,4 @@
+.Page {
+  @apply min-w-full;
+  @apply pb-10;
+}

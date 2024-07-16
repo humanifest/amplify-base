@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@/src/*": ["src/*"],
+      "@/data-schema": ["amplify/data/resource"],
       "_tw/*": ["tailwindcss/*"]
     },
     "forceConsistentCasingInFileNames": true,
@@ -30,6 +31,6 @@
     "types": ["vite/client"]
   },
   "include": ["src", "tailwindcss", "postcss/config.js"],
-  "exclude": ["amplify/**/*"],
+  "exclude": [],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

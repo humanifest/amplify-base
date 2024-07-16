@@ -18,7 +18,7 @@ export function useSecretPaths() {
         url: routes.dev._,
       },
       Dashboard: {
-        url: routes.feature.dashboard._,
+        url: routes.access.dashboard._,
       },
     };
 

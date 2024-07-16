@@ -1,6 +1,9 @@
 import { defineData } from "@aws-amplify/backend";
 import schema from "./schemas";
 
+export * from "./models";
+export * from "./schemas";
+
 export const data = defineData({
   schema,
   authorizationModes: {

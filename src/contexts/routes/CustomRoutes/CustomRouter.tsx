@@ -4,7 +4,7 @@ import { customRoutes } from "./routes";
 export default function FeatureRoutes() {
   return (
     <Routes>
-      <Route path={customRoutes.dashboard._} element={<>dashboard</>} />
+      <Route path={customRoutes.todo._} element={<>todo</>} />
     </Routes>
   );
 }

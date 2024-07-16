@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 
 export default function AuthenticatedRoute({
   element,
-  ...rest
 }: {
   element: ReactNode;
 }) {
@@ -12,8 +11,7 @@ export default function AuthenticatedRoute({
 
   return (
     <Route
-      {...rest}
       element={authStatus !== "authenticated" ? <Authenticator /> : element}
-    />
+    ></Route>
   );
 }

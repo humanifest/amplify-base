@@ -1,13 +1,12 @@
 import { type ClientSchema, a } from "@aws-amplify/backend";
 import { postConfirmation } from "../../functions/post-confirmation/resource";
-import { UserProfile } from "./userProfile";
-import { Contact } from "./contact";
-import { Comment } from "./comment";
-import { Transaction } from "./transaction";
-import { BankAccount } from "./bankaccount";
-import { BankTransfer } from "./banktransfer";
-import { Like } from "./like";
-import { Reaction } from "./reaction";
+import { UserProfile } from "./UserProfile";
+import { Contact } from "./Contact";
+import { Comment } from "./Comment";
+import { Transaction } from "./Transaction";
+import { BankAccount } from "./Bankaccount";
+import { BankTransfer } from "./Banktransfer";
+import { Like } from "./Like";
 import { Todo } from "./Todo";
 
 const SCHEMA = a
@@ -17,7 +16,6 @@ const SCHEMA = a
     Comment,
     Contact,
     Like,
-    Reaction,
     Todo,
     Transaction,
     UserProfile,

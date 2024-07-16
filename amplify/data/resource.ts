@@ -1,5 +1,5 @@
 import { defineData } from "@aws-amplify/backend";
-import schema from "./schema";
+import schema from "./schemas";
 
 export const data = defineData({
   schema,

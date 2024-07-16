@@ -12,6 +12,7 @@ module.exports = {
     "src/_DEV",
     "api/client/graphql",
     "src/components/generated",
+    "cypress",
   ],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],

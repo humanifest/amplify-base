@@ -1,11 +1,13 @@
 import { a } from "@aws-amplify/backend";
+import { m } from "../models";
 
 export const BankTransferType = a.enum(["withdrawal", "deposit"]);
 
 export const BankTransfer = a
   .model({
-    uuid: a.id().required(),
-    user: a.ref("User"),
+    uuid: a.string().required(),
+    userProfileId: a.id(),
+    userProfile: a.belongsTo(m.UserProfile, "userProfileId"),
     source: a.string(),
     amount: a.float(),
     type: BankTransferType,

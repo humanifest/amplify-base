@@ -17,9 +17,6 @@ export function useSecretPaths() {
       _sandbox: {
         url: routes.dev._,
       },
-      Dashboard: {
-        url: routes.access.dashboard._,
-      },
     };
 
     let result = {};
@@ -32,15 +29,20 @@ export function useSecretPaths() {
 
 export default function useClickableNavigation(): Record<string, ClickableNav> {
   const { state: authState } = useContext(AuthContext);
+  const routes = useHydratedUrls();
 
   const secretPaths = useSecretPaths();
   const featurePaths = useFeaturePaths();
 
   return useMemo(() => {
-    const authPaths = {};
+    const authPaths = {
+      Dashboard: {
+        url: routes.access.dashboard._,
+      },
+    };
 
     let result = { ...secretPaths, ...featurePaths };
-    result = authState?.userId ? { ...authPaths, ...result } : result;
+    result = authState?.userId ? { ...result, ...authPaths } : result;
     return result;
-  }, [authState, secretPaths, featurePaths]);
+  }, [routes.access.dashboard._, secretPaths, featurePaths, authState?.userId]);
 }

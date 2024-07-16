@@ -5,7 +5,10 @@ import {
   ProviderErrorBoundary,
   ProviderEffects,
   ProviderClient,
+  ProviderAuth,
 } from "@/src/contexts/providers";
+import { IconsProvider } from "@aws-amplify/ui-react";
+
 import { AppRouter } from "@/src/contexts/routes";
 import "@/src/assets/index.css";
 import "@aws-amplify/ui-react/styles/reset.layer.css"; // global CSS reset
@@ -18,11 +21,15 @@ export default function App() {
       <ProviderErrorBoundary>
         <ProviderFeatureFlags>
           <ProviderClient>
-            <ThemeProvider theme={theme} colorMode="light">
-              <ProviderEffects>
-                <AppRouter />
-              </ProviderEffects>
-            </ThemeProvider>
+            <ProviderAuth>
+              <ThemeProvider theme={theme} colorMode="light">
+                <IconsProvider>
+                  <ProviderEffects>
+                    <AppRouter />
+                  </ProviderEffects>
+                </IconsProvider>
+              </ThemeProvider>
+            </ProviderAuth>
           </ProviderClient>
         </ProviderFeatureFlags>
       </ProviderErrorBoundary>

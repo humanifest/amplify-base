@@ -1,1 +1,1 @@
-export * from "./AuthenticatedRouter";
+export * from "./AuthenticatedRoute";

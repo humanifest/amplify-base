@@ -41,7 +41,7 @@ const useAuth = (): AuthContextType => {
 
   useEffect(() => {
     if (user?.userId != state?.userId) {
-      user.signInDetails?.loginId ? login() : logout();
+      user?.signInDetails?.loginId ? login() : logout();
     }
   }, [state?.userId, user, login, logout]);
 
@@ -50,8 +50,8 @@ const useAuth = (): AuthContextType => {
   }, [attributes, user]);
 
   useEffect(() => {
-    userAttributes();
-  }, []);
+    user?.signInDetails && userAttributes();
+  }, [user?.signInDetails]);
 
   return {
     state,

@@ -6,8 +6,9 @@ test:
         - npm ci
         - npm install -g pm2
         - npm install -g wait-on
-        - npm install mocha mochawesome@4.1.0 mochawesome-merge
-          mochawesome-report-generator
+        - npm install mocha mochawesome
+        - npm install mochawesome-merge
+        - npm install mochawesome-report-generator
         - pm2 start npm -- start
         - wait-on http://localhost:5173
     test:

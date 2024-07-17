@@ -1,4 +1,4 @@
-import { Schema } from "amplify/data/schema";
+import { Schema } from "@/data-schema";
 import { generateClient } from "aws-amplify/data";
 import { PropsWithChildren, createContext } from "react";
 

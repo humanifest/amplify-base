@@ -32,7 +32,7 @@ export default function DrawerItem({
         </div>
         <span
           className={current ? styles.spanCurrent : styles.span}
-          /* NOTE: hide label on small screens */
+          /* NOTE: hide label on collapse */
           style={styleHide(expanded)}
         >
           {label}

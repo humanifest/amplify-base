@@ -33,7 +33,13 @@ export default function NavBar() {
             </div>
           </nav>
 
-          <Divider />
+          <Divider
+            size="small"
+            style={{
+              // NOTE: Prevent overlap of menu
+              zIndex: -1,
+            }}
+          />
 
           {loading && <Loader variation="linear" />}
         </div>

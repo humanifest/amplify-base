@@ -1,6 +1,6 @@
 import TodoCreateForm from "@/src/components/generated/TodoCreateForm";
 import { ProviderClientContext } from "@/src/contexts/providers/ProviderClient/ProviderClient";
-import { Schema } from "amplify/data/schema";
+import { Schema } from "@/data-schema";
 import { useContext, useEffect, useState } from "react";
 import EntityList from "../EntityList/EntityList";
 import { useNavigate } from "react-router-dom";

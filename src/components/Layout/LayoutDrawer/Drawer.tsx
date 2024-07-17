@@ -7,7 +7,7 @@ import DrawerItem from "@/src/components/Layout/LayoutDrawer/DrawerItem/DrawerIt
 import useClickableNavigation from "@/src/contexts/hooks/useClickableNavigation/useClickableNavigation";
 import { DrawerContext } from "@/src/contexts/providers";
 import { styleHide } from "@/src/utils";
-import { drawrerTimeout } from "@/src/assets";
+import { drawerTimeout } from "@/src/assets";
 import { AiOutlineClose } from "react-icons/ai";
 
 export default function SideNav() {
@@ -46,7 +46,7 @@ export default function SideNav() {
             <button
               onClick={() => {
                 // NOTE: use timeout because clicking on the drawer will set the state to true
-                setTimeout(() => setVisibility(false), drawrerTimeout);
+                setTimeout(() => setVisibility(false), drawerTimeout);
               }}
               className={styles.close}
               style={styleHide(drawerState.expanded)}

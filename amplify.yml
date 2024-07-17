@@ -8,7 +8,7 @@ test:
         - npm install -g wait-on
         - npm install mocha mochawesome
         - npm install mochawesome-merge
-        - npm install mochawesome-report-generator
+        - npm install -g mochawesome-report-generator
         - pm2 start npm -- start
         - wait-on http://localhost:5173
     test:

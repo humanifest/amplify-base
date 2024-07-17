@@ -3,12 +3,12 @@ test:
   phases:
     preTest:
       commands:
-        - npm ci
-        - npm install -g pm2
-        - npm install -g wait-on
-        - npm install mocha mochawesome
-        - npm install mochawesome-merge
-        - npm install -g mochawesome-report-generator
+        - npm ci --verbose
+        - npm install -g pm2 --verbose
+        - npm install -g wait-on --verbose
+        - npm install mocha mochawesome --verbose
+        - npm install mochawesome-merge --verbose
+        - npm install -g mochawesome-report-generator --verbose
         - pm2 start npm -- start
         - wait-on http://localhost:5173
     test:

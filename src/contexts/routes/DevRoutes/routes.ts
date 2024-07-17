@@ -6,6 +6,6 @@ const DEV_ROUTES_BLUEPRINTS = {
   ...CUSTOM_ROUTES_BLUEPRINTS,
 };
 
-export const devRoutes = mMap(structuredClone(DEV_ROUTES_BLUEPRINTS));
+export const devRoutes = mMap(DEV_ROUTES_BLUEPRINTS);
 
 export default DEV_ROUTES_BLUEPRINTS;

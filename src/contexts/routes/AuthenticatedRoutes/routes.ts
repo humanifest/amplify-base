@@ -5,7 +5,6 @@ const ACCESS_ROUTES_BLUE_PRINTS = {
   dashboard: __,
 };
 
-//TODO: change to avoid structuredClone
-export const accessRoutes = mMap(structuredClone(ACCESS_ROUTES_BLUE_PRINTS));
+export const accessRoutes = mMap(ACCESS_ROUTES_BLUE_PRINTS);
 
 export default ACCESS_ROUTES_BLUE_PRINTS;

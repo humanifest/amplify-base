@@ -6,7 +6,6 @@ const CUSTOM_ROUTES_BLUEPRINTS = {
   },
 };
 
-// TODO change to avoid structuredClone
-export const customRoutes = mMap(structuredClone(CUSTOM_ROUTES_BLUEPRINTS));
+export const customRoutes = mMap(CUSTOM_ROUTES_BLUEPRINTS);
 
 export default CUSTOM_ROUTES_BLUEPRINTS;

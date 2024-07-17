@@ -13,5 +13,4 @@ const topLevelRoutes = {
   admin: __,
 };
 
-//TODO: change to avoid structuredClone
-export default structuredClone(topLevelRoutes);
+export default topLevelRoutes;

@@ -23,7 +23,8 @@
 }
 .itemCurrent {
   @apply item;
-  @apply MidMidsRev;
+  @apply LightGradientRev;
+  @apply text-darks-secondary;
 }
 .icon {
   @apply fill-darks-primary;

@@ -8,6 +8,7 @@ import useClickableNavigation from "@/src/contexts/hooks/useClickableNavigation/
 import { DrawerContext } from "@/src/contexts/providers";
 import { styleHide } from "@/src/utils";
 import { drawrerTimeout } from "@/src/assets";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function SideNav() {
   const {
@@ -50,7 +51,7 @@ export default function SideNav() {
               className={styles.close}
               style={styleHide(drawerState.expanded)}
             >
-              x
+              <AiOutlineClose />
             </button>
           </>
         )}

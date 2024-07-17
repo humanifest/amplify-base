@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useClickableNavigation from "@/src/contexts/hooks/useClickableNavigation/useClickableNavigation";
 import { Divider, Menu, MenuItem } from "@aws-amplify/ui-react";
 import useNavUtils from "@/src/contexts/hooks/useNavUtils";
+import { navIconGap } from "@/src/assets";
 
 export default function NavBarDropDown() {
   const nav = useNavigate();
@@ -16,13 +17,16 @@ export default function NavBarDropDown() {
         <MenuItem
           key={rkey(index, label)}
           onClick={() => nav(item.url)}
-          children={label}
-          {...item}
-        />
+          gap={navIconGap}
+        >
+          {item.icon && <item.icon />} {label}
+        </MenuItem>
       ))}
       <Divider />
       {Object.entries(navUtils).map(([label, item], index) => (
-        <MenuItem key={rkey(index, label)} children={label} {...item} />
+        <MenuItem key={rkey(index, label)} gap={navIconGap}>
+          {item.icon && <item.icon />} {label}
+        </MenuItem>
       ))}
     </Menu>
   );

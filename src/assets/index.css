@@ -58,6 +58,9 @@
   .LightMids {
     @apply bg-gradient-to-tl from-lights-primary to-mids-secondary;
   }
+  .LightMidsRev {
+    @apply bg-gradient-to-br from-mids-secondary to-lights-primary;
+  }
   .MidMids {
     @apply bg-gradient-to-tl from-mids-secondary to-mids-primary;
   }

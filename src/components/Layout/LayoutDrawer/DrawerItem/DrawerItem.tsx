@@ -3,13 +3,16 @@ import { Link, useMatch } from "react-router-dom";
 import styles from "./DrawerItem.module.css";
 import { DrawerContext } from "@/src/contexts/providers";
 import { styleHide, styleTransparently } from "@/src/utils";
+import { IconType } from "react-icons";
 
 export default function DrawerItem({
   label,
   url,
+  ...item
 }: {
   label: string;
   url: string;
+  icon: IconType;
 }) {
   const current = useMatch(url);
   const {
@@ -24,8 +27,12 @@ export default function DrawerItem({
         to={url}
         data-test={`DrawerItem-${label}`}
       >
+        <div className={current ? styles.itemCurrent : styles.item}>
+          <item.icon color={current ? styles.iconCurrent : styles.icon} />
+        </div>
         <span
           className={current ? styles.spanCurrent : styles.span}
+          /* NOTE: hide label on small screens */
           style={styleHide(expanded)}
         >
           {label}

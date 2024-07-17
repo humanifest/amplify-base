@@ -9,7 +9,7 @@ test:
         - npm install mocha mochawesome --verbose
         - npm install mochawesome-merge --verbose
         - npm install -g mochawesome-report-generator --verbose
-        - pm2 start npm -- run dev
+        - pm2 start npm -- run vite preview
         - wait-on http://localhost:5173
     test:
       commands:

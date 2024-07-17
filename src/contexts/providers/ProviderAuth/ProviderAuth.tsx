@@ -22,7 +22,10 @@ type AuthContextType = {
 const useAuth = (): AuthContextType => {
   const [attributes, setAttributes] = useState<FetchUserAttributesOutput>({});
 
-  const { user, signOut } = useAuthenticator((context) => [context.user]);
+  const { user, signOut, authStatus } = useAuthenticator((context) => [
+    context.user,
+    context.authStatus,
+  ]);
   const [state, setAuthState] = useState<AuthState>(initAuthState());
 
   const logout = useCallback(() => {
@@ -46,8 +49,8 @@ const useAuth = (): AuthContextType => {
   }, [state?.userId, user, login, logout]);
 
   useEffect(() => {
-    setAuthState((prev) => ({ ...prev, attributes }));
-  }, [attributes, user]);
+    setAuthState((prev) => ({ ...prev, attributes, authStatus }));
+  }, [attributes, user, authStatus]);
 
   useEffect(() => {
     user?.signInDetails && userAttributes();

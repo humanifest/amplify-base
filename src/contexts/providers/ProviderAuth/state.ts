@@ -7,12 +7,14 @@ export enum ApplicationUserRoles {
 }
 
 const userDataState: AuthState = {
-  userId: "0",
+  authStatus: "unauthenticated",
+  userId: "",
   username: "",
   attributes: {},
 };
 
 export interface AuthState extends AuthUser {
+  authStatus: string;
   attributes: FetchUserAttributesOutput;
 }
 

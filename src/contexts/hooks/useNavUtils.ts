@@ -10,7 +10,10 @@ export interface ClickableNavUtil {
 }
 
 export default function useNavUtils(): Record<string, ClickableNavUtil> {
-  const { state: authState, logout } = useContext(AuthContext);
+  const {
+    state: { authStatus },
+    logout,
+  } = useContext(AuthContext);
 
   return useMemo(() => {
     const authUtils: Record<string, ClickableNavUtil> = {
@@ -24,7 +27,8 @@ export default function useNavUtils(): Record<string, ClickableNavUtil> {
     };
 
     let result = {};
-    result = authState?.userId ? { ...result, ...authUtils } : result;
+    result =
+      authStatus === "authenticated" ? { ...result, ...authUtils } : result;
     return result;
-  }, [authState?.userId, logout]);
+  }, [authStatus, logout]);
 }

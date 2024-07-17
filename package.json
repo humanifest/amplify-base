@@ -33,7 +33,7 @@
     }
   },
   "devDependencies": {
-    "@avaelus/super-project-utils": "^1.1.1",
+    "@avaelus/super-project-utils": "^1.1.5",
     "@aws-amplify/backend": "^1.0.0",
     "@aws-amplify/backend-cli": "^1.0.1",
     "@cypress/code-coverage": "^3.10.0-dev.1",

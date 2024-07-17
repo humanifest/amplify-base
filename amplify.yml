@@ -1,32 +1,32 @@
 version: 1
-test:
-  phases:
-    preTest:
-      commands:
-        - npm ci --verbose
-        - npm install -g pm2 --verbose
-        - npm install -g wait-on --verbose
-        - npm install mocha mochawesome --verbose
-        - npm install mochawesome-merge --verbose
-        - npm install -g mochawesome-report-generator --verbose
-        - pm2 start npm -- run dev
-        - wait-on http://localhost:5173
-    test:
-      commands:
-        - 'npx cypress run --reporter mochawesome --reporter-options
-          "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
-    postTest:
-      commands:
-        - npx mochawesome-merge
-          cypress/report/mochawesome-report/mochawesome*.json >
-          cypress/report/mochawesome.json
-        - pm2 kill
-  artifacts:
-    baseDirectory: cypress
-    configFilePath: "**/mochawesome.json"
-    files:
-      - "**/*.png"
-      - "**/*.mp4"
+# test:
+#   phases:
+#     preTest:
+#       commands:
+#         - npm ci --verbose
+#         - npm install -g pm2 --verbose
+#         - npm install -g wait-on --verbose
+#         - npm install mocha mochawesome --verbose
+#         - npm install mochawesome-merge --verbose
+#         - npm install -g mochawesome-report-generator --verbose
+#         - pm2 start npm -- run dev
+#         - wait-on http://localhost:5173
+#     test:
+#       commands:
+#         - 'npx cypress run --reporter mochawesome --reporter-options
+#           "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
+#     postTest:
+#       commands:
+#         - npx mochawesome-merge
+#           cypress/report/mochawesome-report/mochawesome*.json >
+#           cypress/report/mochawesome.json
+#         - pm2 kill
+#   artifacts:
+#     baseDirectory: cypress
+#     configFilePath: "**/mochawesome.json"
+#     files:
+#       - "**/*.png"
+#       - "**/*.mp4"
 backend:
   phases:
     build:

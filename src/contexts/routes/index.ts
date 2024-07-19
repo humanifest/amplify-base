@@ -6,16 +6,12 @@ import ACCESS_ROUTES_BLUE_PRINTS from "./AuthenticatedRoutes/routes";
 
 const ROUTE_BLUEPRINTS = {
   ...DEFAULT_ROUTES_BLUEPRINTS,
-  feature: { ...CUSTOM_ROUTES_BLUEPRINTS },
-  dev: {
-    ...DEV_ROUTES_BLUEPRINTS,
-  },
-  access: {
-    ...ACCESS_ROUTES_BLUE_PRINTS,
-  },
+  feature: CUSTOM_ROUTES_BLUEPRINTS,
+  dev: DEV_ROUTES_BLUEPRINTS,
+  access: ACCESS_ROUTES_BLUE_PRINTS,
 };
 
-export const ROUTES = mMap(structuredClone(ROUTE_BLUEPRINTS));
+export const ROUTES = mMap(ROUTE_BLUEPRINTS);
 export type AppRoutes = typeof ROUTES;
 
 export { AppRouter } from "./Router";

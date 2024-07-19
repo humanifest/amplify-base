@@ -4,6 +4,7 @@ import NavBarDropDownMenu from "@/src/components/Layout/LayoutNavBar/NavBarDropD
 import { LoadingContext } from "@/src/contexts/providers";
 import { NavbarContext } from "@/src/contexts/providers/ProviderLayout/ProviderLayout";
 import { Divider, Loader } from "@aws-amplify/ui-react";
+import { styleHide } from "@/src/utils";
 export default function NavBar() {
   const {
     state: { visible: isOpen },
@@ -40,8 +41,7 @@ export default function NavBar() {
               zIndex: -1,
             }}
           />
-
-          {loading && <Loader variation="linear" />}
+          <Loader variation="linear" size="small" style={styleHide(loading)} />
         </div>
       )}
     </>

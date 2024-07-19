@@ -9,6 +9,7 @@ const topLevelRoutes = {
     contact: __,
     license: __,
     tos: __,
+    privacy: __,
   },
   admin: __,
 };

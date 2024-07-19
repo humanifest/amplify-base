@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import outputs from "../amplify_outputs.json";
 import { App } from "@/src/components";
 import "@aws-amplify/ui-react/styles.css";
-
+import { APP_TITLE, FAV_ICON_URL } from "@/env/env.api";
 Amplify.configure(outputs);
 
 const root = document?.getElementById("root") as HTMLElement;
@@ -18,8 +18,8 @@ if (root && title && icon) {
     </StrictMode>
   );
 
-  title.innerHTML = import.meta.env.VITE_APP_TITLE;
-  icon.href = import.meta.env.VITE_FAV_ICON_URL;
+  title.innerHTML = APP_TITLE;
+  icon.href = FAV_ICON_URL;
 } else {
   // TODO: alert sentry
   throw new Error("React Root does not exist, please load HTML first.");

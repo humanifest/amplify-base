@@ -5,6 +5,7 @@ import FooterLink from "./FooterLink";
 import { FooterContext } from "@/src/contexts/providers/ProviderLayout/ProviderLayout";
 import { ROUTES } from "@/src/contexts/routes";
 import { styleDisplay } from "@/src/utils";
+import { COPYRIGHT } from "@/env/env.api";
 export default function Footer() {
   const {
     state: { visible },
@@ -25,7 +26,7 @@ export default function Footer() {
           <div className={styles.div2}>
             <div className={styles.div3}>
               <div className={styles.div4}>
-                © {import.meta.env.VITE_COPYRIGHT}
+                © {COPYRIGHT}
                 <script>document.write(new Date().getFullYear() + ",");</script>
               </div>
             </div>

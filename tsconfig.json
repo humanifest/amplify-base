@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/env/*": ["env/*"],
       "@/src/*": ["src/*"],
       "@/data-schema": ["amplify/data/resource"],
       "_tw/*": ["tailwindcss/*"]

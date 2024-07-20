@@ -154,7 +154,7 @@ export type ModelContactConnection = {
 export type Contact = {
   __typename: "Contact",
   contactUseProfileId?: string | null,
-  contactUserProfile?: UserProfile | null,
+  contactuserProfile?: UserProfile | null,
   createdAt: string,
   id: string,
   owner?: string | null,
@@ -991,7 +991,7 @@ export type GetContactQuery = {
   getContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,
@@ -1511,7 +1511,7 @@ export type CreateContactMutation = {
   createContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,
@@ -1838,7 +1838,7 @@ export type DeleteContactMutation = {
   deleteContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,
@@ -2165,7 +2165,7 @@ export type UpdateContactMutation = {
   updateContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,
@@ -2491,7 +2491,7 @@ export type OnCreateContactSubscription = {
   onCreateContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,
@@ -2817,7 +2817,7 @@ export type OnDeleteContactSubscription = {
   onDeleteContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,
@@ -3143,7 +3143,7 @@ export type OnUpdateContactSubscription = {
   onUpdateContact?:  {
     __typename: "Contact",
     contactUseProfileId?: string | null,
-    contactUserProfile?:  {
+    contactuserProfile?:  {
       __typename: "UserProfile",
       avatar?: string | null,
       balance?: number | null,

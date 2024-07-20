@@ -127,7 +127,7 @@ export const onCreateContact = /* GraphQL */ `subscription OnCreateContact(
 ) {
   onCreateContact(filter: $filter, owner: $owner) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt
@@ -459,7 +459,7 @@ export const onDeleteContact = /* GraphQL */ `subscription OnDeleteContact(
 ) {
   onDeleteContact(filter: $filter, owner: $owner) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt
@@ -791,7 +791,7 @@ export const onUpdateContact = /* GraphQL */ `subscription OnUpdateContact(
 ) {
   onUpdateContact(filter: $filter, owner: $owner) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt

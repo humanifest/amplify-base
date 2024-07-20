@@ -118,7 +118,7 @@ export const getComment = /* GraphQL */ `query GetComment($id: ID!) {
 export const getContact = /* GraphQL */ `query GetContact($id: ID!) {
   getContact(id: $id) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt

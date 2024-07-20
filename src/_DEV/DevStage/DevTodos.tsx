@@ -1,14 +1,15 @@
 import TodoCreateForm from "@/src/components/generated/TodoCreateForm";
 import { ProviderClientContext } from "@/src/contexts/providers/ProviderClient/ProviderClient";
-import { Schema } from "@/data-schema";
+import { Models, m } from "@/data-schema";
 import { useContext, useEffect, useState } from "react";
 import EntityList from "../EntityList/EntityList";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/src/contexts/routes";
 
-type Todos = Schema["Todo"]["type"];
+type Todo = Models[m.Todo];
+type Todos = Todo[];
 export default function DevTodos() {
-  const [todos, setTodos] = useState<Todos[]>([]);
+  const [todos, setTodos] = useState<Todos>([]);
   const client = useContext(ProviderClientContext);
   const nav = useNavigate();
   function deleteTodo(id: string) {

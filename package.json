@@ -9,6 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "gen-forms": "npx ampx generate forms --out-dir ./src/components/generated",
+    "postgen-forms": "bash ./scripts/copyAndDeclareGeneratedFormTypes.sh",
     "gen-gql": "npx ampx generate graphql-client-code --out api/client/graphql",
     "prepare": "husky || true",
     "cy:open": "cypress open"

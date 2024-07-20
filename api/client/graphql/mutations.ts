@@ -130,7 +130,7 @@ export const createContact = /* GraphQL */ `mutation CreateContact(
 ) {
   createContact(condition: $condition, input: $input) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt
@@ -465,7 +465,7 @@ export const deleteContact = /* GraphQL */ `mutation DeleteContact(
 ) {
   deleteContact(condition: $condition, input: $input) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt
@@ -800,7 +800,7 @@ export const updateContact = /* GraphQL */ `mutation UpdateContact(
 ) {
   updateContact(condition: $condition, input: $input) {
     contactUseProfileId
-    contactUserProfile {
+    contactuserProfile {
       avatar
       balance
       createdAt

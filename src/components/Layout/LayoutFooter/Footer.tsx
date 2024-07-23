@@ -6,6 +6,8 @@ import { FooterContext } from "@/src/contexts/providers/ProviderLayout/ProviderL
 import { ROUTES } from "@/src/contexts/routes";
 import { styleDisplay } from "@/src/utils";
 import { COPYRIGHT } from "@/env/env.api";
+import { Link } from "@aws-amplify/ui-react";
+
 export default function Footer() {
   const {
     state: { visible },
@@ -13,9 +15,9 @@ export default function Footer() {
 
   const footerLinks = useMemo(
     () => ({
-      About: ROUTES.pages.about._,
-      Contact: ROUTES.pages.contact._,
-      License: ROUTES.pages.license._,
+      About: ROUTES.about._,
+      "Privacy Policy": ROUTES.privacy._,
+      "Terms of Service": ROUTES.tos._,
     }),
     []
   );
@@ -26,8 +28,9 @@ export default function Footer() {
           <div className={styles.div2}>
             <div className={styles.div3}>
               <div className={styles.div4}>
-                © {COPYRIGHT}
-                <script>document.write(new Date().getFullYear() + ",");</script>
+                <Link href={ROUTES.contact._}>
+                  © {COPYRIGHT} {new Date().getFullYear()}
+                </Link>
               </div>
             </div>
             <div className={styles.div5}>

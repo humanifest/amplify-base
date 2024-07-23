@@ -15,4 +15,11 @@ export const COPYRIGHT = import.meta.env.VITE_COPYRIGHT || "CompanyName";
 export const COMPANY_NAME = import.meta.env.VITE_COMPANY_NAME || "Our Company";
 export const CONTACT_EMAIL =
   import.meta.env.VITE_CONTACT_EMAIL || "contact@mailserver.com";
+export const CONTACT_ADDRESS_STREET =
+  import.meta.env.VITE_CONTACT_ADDRESS_STREET || "123 St Somewhere";
+export const CONTACT_ADDRESS_CITY_STATE_ZIP =
+  import.meta.env.VITE_CONTACT_ADDRESS_CITY_STATE_ZIP ||
+  "Utopia Utopia 1234567";
+export const CONTACT_ADDRESS_COUNTRY =
+  import.meta.env.VITE_CONTACT_ADDRESS_COUNTRY || "Fantasia";
 export const FAV_ICON_URL = import.meta.env.VITE_FAV_ICON_URL || "/logo.svg";

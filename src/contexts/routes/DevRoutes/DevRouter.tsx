@@ -8,6 +8,8 @@ import DevEffects from "@/src/_DEV/DevStage/DevEffects";
 import TodoUpdateForm from "@/src/components/generated/TodoUpdateForm";
 import EntityUpdate from "@/src/_DEV/EntityList/EntityUpdate";
 import { devRoutes } from "./routes";
+import { TransactionUpdateForm } from "@/src/components";
+import DevTransactions from "@/src/_DEV/DevStage/DevTransactions";
 
 export default function DevRouter() {
   const { showDevOpts } = useContext(FeatureFlagContext);
@@ -28,6 +30,19 @@ export default function DevRouter() {
                     Component={TodoUpdateForm}
                     prefix="todoId"
                     onSubmit={() => nav(ROUTES.dev.todo._)}
+                  />
+                }
+              />
+            </Route>
+            <Route path={devRoutes.transaction._}>
+              <Route index element={<DevTransactions />} />
+              <Route
+                path={devRoutes.transaction[":transactionId"]._}
+                element={
+                  <EntityUpdate
+                    Component={TransactionUpdateForm}
+                    prefix="transactionId"
+                    onSubmit={() => nav(ROUTES.dev.transaction._)}
                   />
                 }
               />

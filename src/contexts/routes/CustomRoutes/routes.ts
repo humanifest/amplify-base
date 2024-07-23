@@ -4,6 +4,9 @@ const CUSTOM_ROUTES_BLUEPRINTS = {
   todo: {
     ":todoId": __,
   },
+  transaction: {
+    ":transactionId": __,
+  },
 };
 
 export const customRoutes = mMap(CUSTOM_ROUTES_BLUEPRINTS);

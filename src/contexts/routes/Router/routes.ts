@@ -4,13 +4,10 @@ const topLevelRoutes = {
   user: {
     ":userId": __,
   },
-  pages: {
-    about: __,
-    contact: __,
-    license: __,
-    tos: __,
-    privacy: __,
-  },
+  about: __,
+  contact: __,
+  tos: __,
+  privacy: __,
   admin: __,
 };
 

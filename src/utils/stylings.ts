@@ -27,5 +27,5 @@ export const styleTransparently: (v: boolean) => CSSProperties | undefined = (
 
 export const styleBackgroundImage = (imageUrl: string) =>
   ({
-    [CssVariables.imageUrl]: `url(${imageUrl})`,
+    backgroundImage: `url(${imageUrl})`,
   } as CSSProperties);

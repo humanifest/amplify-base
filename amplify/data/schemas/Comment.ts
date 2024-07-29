@@ -10,4 +10,4 @@ export const Comment = a
     transactionId: a.id(),
     transaction: a.belongsTo(m.Transaction, "transactionId"),
   })
-  .authorization((allow) => [allow.publicApiKey()]);
+  .authorization((allow) => [allow.publicApiKey(), allow.authenticated()]);

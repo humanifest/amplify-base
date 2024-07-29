@@ -35,7 +35,6 @@ export default function DevTransactions() {
           },
         }}
         onSubmit={(fields) => {
-          console.log(fields);
           nav(ROUTES.dev._);
 
           return fields;

@@ -9,6 +9,7 @@ import TermsOfService from "@/src/components/Inlet/InletTermsOfService";
 import PrivacyPolicy from "@/src/components/Inlet/InletPrivacy";
 import PageAbout from "@/src/components/Inlet/InletAbout";
 import PageContact from "@/src/components/Inlet/InletContact";
+import Welcome from "@/src/components/Page/Welcome/Welcome";
 
 export default function AppRouter() {
   return (
@@ -16,7 +17,7 @@ export default function AppRouter() {
       <BrowserRouter>
         <Routes>
           <Route path={ROUTES._} element={<FullPage />}>
-            <Route index element={<>home</>} />
+            <Route index element={<Welcome />} />
             <Route path={ROUTES.about._} element={<PageAbout />} />
             <Route path={ROUTES.contact._} element={<PageContact />} />
             <Route path={ROUTES.privacy._} element={<PrivacyPolicy />} />

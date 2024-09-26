@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { Navigate, Routes, Route, useNavigate } from "react-router-dom";
 import { DevStage } from "@/src/_DEV";
 import { FeatureFlagContext } from "@/src/contexts/providers";
-import { ROUTES } from "..";
-import DevTodos from "@/src/_DEV/DevStage/DevTodos";
 import DevEffects from "@/src/_DEV/DevStage/DevEffects";
+import { devRoutes } from "./routes";
+import { ROUTES } from "@/src/contexts/routes";
+import DevTodos from "@/src/_DEV/DevStage/DevTodos";
 import TodoUpdateForm from "@/src/components/generated/TodoUpdateForm";
 import EntityUpdate from "@/src/_DEV/EntityList/EntityUpdate";
-import { devRoutes } from "./routes";
 import { TransactionUpdateForm } from "@/src/components";
 import DevTransactions from "@/src/_DEV/DevStage/DevTransactions";
 
@@ -17,6 +17,16 @@ export default function DevRouter() {
 
   return (
     <Routes>
+      {showDevOpts ? (
+        <>
+          <Route path={devRoutes._} element={<DevStage />}>
+            <Route index path={devRoutes.effects._} element={<DevEffects />} />
+          </Route>
+        </>
+      ) : (
+        <Route element={<Navigate to={ROUTES._} />} />
+      )}
+
       {showDevOpts ? (
         <>
           <Route path={devRoutes._} element={<DevStage />}>

@@ -21,4 +21,3 @@ export {
   default as ProviderLoading,
   LoadingContext,
 } from "./ProviderLoading/ProviderLoading";
-export { default as ProviderClient } from "./ProviderClient/ProviderClient";

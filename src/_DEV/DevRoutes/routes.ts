@@ -1,5 +1,5 @@
+import CUSTOM_ROUTES_BLUEPRINTS from "@/src/contexts/routes/CustomRoutes/routes";
 import { __, mMap } from "@avaelus/super-project-utils";
-import CUSTOM_ROUTES_BLUEPRINTS from "../CustomRoutes/routes";
 
 const DEV_ROUTES_BLUEPRINTS = {
   effects: __,

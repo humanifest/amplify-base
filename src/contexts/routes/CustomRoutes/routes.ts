@@ -7,6 +7,7 @@ const CUSTOM_ROUTES_BLUEPRINTS = {
   transaction: {
     ":transactionId": __,
   },
+  userProfile: __,
 };
 
 export const customRoutes = mMap(CUSTOM_ROUTES_BLUEPRINTS);

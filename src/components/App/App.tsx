@@ -4,7 +4,6 @@ import {
   ProviderFeatureFlags,
   ProviderErrorBoundary,
   ProviderEffects,
-  ProviderClient,
   ProviderAuth,
 } from "@/src/contexts/providers";
 import { IconsProvider } from "@aws-amplify/ui-react";
@@ -20,17 +19,15 @@ export default function App() {
     <div id="App">
       <ProviderErrorBoundary>
         <ProviderFeatureFlags>
-          <ProviderClient>
-            <ProviderAuth>
-              <ThemeProvider theme={theme} colorMode="light">
-                <IconsProvider>
-                  <ProviderEffects>
-                    <AppRouter />
-                  </ProviderEffects>
-                </IconsProvider>
-              </ThemeProvider>
-            </ProviderAuth>
-          </ProviderClient>
+          <ProviderAuth>
+            <ThemeProvider theme={theme} colorMode="light">
+              <IconsProvider>
+                <ProviderEffects>
+                  <AppRouter />
+                </ProviderEffects>
+              </IconsProvider>
+            </ThemeProvider>
+          </ProviderAuth>
         </ProviderFeatureFlags>
       </ProviderErrorBoundary>
     </div>

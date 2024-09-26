@@ -3,7 +3,7 @@ import { useHydratedUrls } from "..";
 import { AuthContext, FeatureFlagContext } from "@/src/contexts/providers";
 import { useFeaturePaths } from "../useFeaturePaths";
 import { IconType } from "react-icons";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiOutlineUser } from "react-icons/ai";
 import { AiFillDashboard } from "react-icons/ai";
 import { AiFillTool } from "react-icons/ai";
 import { AiOutlineLogin } from "react-icons/ai";
@@ -46,6 +46,11 @@ export default function useClickableNavigation(): Record<string, ClickableNav> {
 
   return useMemo(() => {
     const authPaths: Record<string, ClickableNav> = {
+      Profile: {
+        icon: AiOutlineUser,
+        url: routes.access.profile._,
+        "data-test": "profile-button",
+      },
       Dashboard: {
         icon: AiFillDashboard,
         url: routes.access.dashboard._,
@@ -54,6 +59,11 @@ export default function useClickableNavigation(): Record<string, ClickableNav> {
     };
 
     const unauthPaths: Record<string, ClickableNav> = {
+      Home: {
+        icon: AiFillHome,
+        url: routes._,
+        "data-test": "home-button",
+      },
       Login: {
         icon: AiOutlineLogin,
         url: routes.access.dashboard._,
@@ -62,18 +72,13 @@ export default function useClickableNavigation(): Record<string, ClickableNav> {
     };
 
     let result = {
-      Home: {
-        icon: AiFillHome,
-        url: routes._,
-        "data-test": "home-button",
-      },
       ...secretPaths,
       ...featurePaths,
     };
     result =
       authStatus === "authenticated"
-        ? { ...result, ...authPaths }
-        : { ...result, ...unauthPaths };
+        ? { ...authPaths, ...result }
+        : { ...unauthPaths, ...result };
     return result;
   }, [routes, secretPaths, featurePaths, authStatus]);
 }

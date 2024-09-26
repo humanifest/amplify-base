@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DevRouter from "@/src/contexts/routes/DevRoutes/DevRouter";
 
 import { FullPage } from "@/src/components/Page/variants";
 import { ROUTES } from "../";
@@ -10,6 +9,7 @@ import PrivacyPolicy from "@/src/components/Inlet/InletPrivacy";
 import PageAbout from "@/src/components/Inlet/InletAbout";
 import PageContact from "@/src/components/Inlet/InletContact";
 import Welcome from "@/src/components/Page/Welcome/Welcome";
+import DevRouter from "@/src/_DEV/DevRoutes/DevRouter";
 
 export default function AppRouter() {
   return (

@@ -29,12 +29,20 @@ jobs:
       - name: Get the list of TODOs from the diff
         id: find_todos
         run: |
-          echo "Fetching base and head refs..."
           git fetch origin ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
-          echo "Generating diff between base and head:"
-          DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }})
-          TODOS=$(echo "$DIFF" | grep -E '^\+.*TODO:' || true)
-          echo "todos=$TODOS" >> $GITHUB_ENV
+          BASE_BRANCH="origin/${{ github.event.pull_request.base.ref }}"
+          HEAD_BRANCH="origin/${{ github.event.pull_request.head.ref }}"
+
+          # Check for common ancestor
+          if git merge-base --is-ancestor $BASE_BRANCH $HEAD_BRANCH; then
+            DIFF=$(git diff $BASE_BRANCH...$HEAD_BRANCH)
+            TODOS=$(echo "$DIFF" | grep -E '^\+.*TODO:' || true)
+            if [ -n "$TODOS" ]; then
+              echo "todos=$TODOS" >> $GITHUB_ENV
+            fi
+          else
+            echo "No common ancestor found between $BASE_BRANCH and $HEAD_BRANCH."
+          fi
 
       - name: Debug PR Number
         run: |

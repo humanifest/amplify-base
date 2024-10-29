@@ -20,6 +20,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Fetch Branches Properly
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          git fetch origin ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate Diff
+        run: |
+          DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}..origin/${{ github.event.pull_request.head.ref }} || true)
+          echo "$DIFF"
+
       - name: Checkout the PR code
         uses: actions/checkout@v3
         with:

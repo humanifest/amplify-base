@@ -23,15 +23,12 @@ jobs:
       - name: Checkout the PR code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Fetch all history to avoid shallow clone issues
-        # with:
-        #   ref: ${{ github.event.pull_request.head.ref }}
-        #   repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0  # Fetch all history to avoid shallow clone issues
 
       - name: Show branch history
         run: |
-          git log --oneline origin/main
-          git log --oneline origin/dev
+          git log --oneline origin/main || echo "No main branch history."
+          git log --oneline origin/dev || echo "No dev branch history."
 
       - name: Fetch Branches Properly
         run: |
@@ -52,15 +49,12 @@ jobs:
           echo "$DIFF"
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
           if [ -n "$TODOS" ]; then
-            echo "Encoded TODOs:"
-            echo "$TODOS" | base64 > todos.txt
-            cat todos.txt
+            echo "$TODOS" > todos.txt
             echo "todos=$(cat todos.txt)" >> $GITHUB_ENV
           fi
 
       - name: Debug PR Number
-        run: |
-          echo "PR Number: ${{ github.event.pull_request.number }}"
+        run: echo "PR Number: ${{ github.event.pull_request.number }}"
 
       - name: Debug TODOs Output
         run: |
@@ -69,14 +63,10 @@ jobs:
             echo "No TODOs detected."
           fi
 
-      - name: Comment on the PR if TODOs are found
+      - name: Decode and Comment on the PR if TODOs are found
         if: ${{ env.todos != '' }}
-        uses: peter-evans/create-or-update-comment@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ⚠️ **New TODOs detected in this PR:**
-            ```
-            ${{ env.todos }}
-            ```
+        run: |
+          TODOS=$(cat todos.txt)
+          echo "Creating PR comment with the following TODOs:"
+          echo "$TODOS"
+          gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODOs detected in this PR:** ```$TODOS```"

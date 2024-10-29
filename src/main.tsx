@@ -10,6 +10,7 @@ Amplify.configure(outputs);
 const root = document?.getElementById("root") as HTMLElement;
 const title = document?.getElementById("appTitle");
 const icon = document?.getElementById("appFavicon") as HTMLAnchorElement;
+// TODO: test
 
 if (root && title && icon) {
   createRoot(root).render(

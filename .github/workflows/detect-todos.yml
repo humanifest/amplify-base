@@ -24,9 +24,7 @@ jobs:
         run: |
           git fetch origin ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
           DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }})
-
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
-
           if [ -n "$TODOS" ]; then
             echo "::set-output name=todos::$TODOS"
           fi
@@ -37,7 +35,7 @@ jobs:
       - name: Debug TODOs Output
         run: |
           echo "TODOs: ${{ steps.find_todos.outputs.todos }}"
-
+        
       - name: Comment on the PR if TODOs are found
         if: steps.find_todos.outputs.todos != ''
         uses: peter-evans/create-or-update-comment@v3
@@ -46,7 +44,6 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ⚠️ **New TODOs detected in this PR:**
-
             ```
             ${{ steps.find_todos.outputs.todos }}
             ```

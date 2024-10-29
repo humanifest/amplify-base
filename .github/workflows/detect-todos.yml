@@ -9,6 +9,13 @@ permissions:
   issues: write
 
 jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello World
+        run: echo "Hello, World!"
+
   detect_todos:
     runs-on: ubuntu-latest
 

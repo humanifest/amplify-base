@@ -22,5 +22,6 @@ if (root && title && icon) {
   icon.href = FAV_ICON_URL;
 } else {
   // TODO: alert sentry
+  // TODO: alert sentry
   throw new Error("React Root does not exist, please load HTML first.");
 }

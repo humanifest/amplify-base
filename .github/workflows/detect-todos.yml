@@ -35,7 +35,7 @@ jobs:
       - name: Debug TODOs Output
         run: |
           echo "TODOs: ${{ env.todos }}"
-        
+
       - name: Comment on the PR if TODOs are found
         if: env.todos != ''
         uses: peter-evans/create-or-update-comment@v3
@@ -46,4 +46,4 @@ jobs:
             ⚠️ **New TODOs detected in this PR:**
             ```
             ${{ env.todos }}
- 
+            ```

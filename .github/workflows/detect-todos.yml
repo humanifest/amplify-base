@@ -35,7 +35,8 @@ jobs:
         run: echo "PR Number: ${{ github.event.pull_request.number }}"
 
       - name: Debug TODOs Output
-        run: echo "TODOs: ${{ steps.find_todos.outputs.todos }}"
+        run: |
+          echo "TODOs: ${{ steps.find_todos.outputs.todos }}"
 
       - name: Comment on the PR if TODOs are found
         if: steps.find_todos.outputs.todos != ''

@@ -46,19 +46,16 @@ jobs:
       - name: Get the list of TODOs from the diff
         id: find_todos
         run: |
-          git fetch origin ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
-          BASE_BRANCH="origin/${{ github.event.pull_request.base.ref }}"
-          HEAD_BRANCH="origin/${{ github.event.pull_request.head.ref }}"
-
-          # Check for common ancestor
-          if git merge-base --is-ancestor $BASE_BRANCH $HEAD_BRANCH; then
-            DIFF=$(git diff $BASE_BRANCH...$HEAD_BRANCH)
-            TODOS=$(echo "$DIFF" | grep -E '^\+.*TODO:' || true)
-            if [ -n "$TODOS" ]; then
-              echo "todos=$TODOS" >> $GITHUB_ENV
-            fi
-          else
-            echo "No common ancestor found between $BASE_BRANCH and $HEAD_BRANCH."
+          BASE=${{ github.event.pull_request.base.ref }}
+          HEAD=${{ github.event.pull_request.head.ref }}
+          DIFF=$(git diff origin/$BASE..origin/$HEAD || true)
+          echo "$DIFF"
+          TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
+          if [ -n "$TODOS" ]; then
+            echo "Encoded TODOs:"
+            echo "$TODOS" | base64 > todos.txt
+            cat todos.txt
+            echo "todos=$(cat todos.txt)" >> $GITHUB_ENV
           fi
 
       - name: Debug PR Number

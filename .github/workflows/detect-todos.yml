@@ -1,0 +1,44 @@
+name: Detect TODOs in PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  detect_todos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Get the list of TODOs from the diff
+        id: find_todos
+        run: |
+          # Get the diff of the current PR
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }})
+
+          # Filter for lines containing TODOs
+          TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
+
+          # Save the TODOs as output if any are found
+          if [ -n "$TODOS" ]; then
+            echo "TODOs found: $TODOS"
+            echo "::set-output name=todos::$TODOS"
+          fi
+
+      - name: Comment on the PR if TODOs are found
+        if: steps.find_todos.outputs.todos != ''
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ⚠️ **New TODOs detected in this PR:**
+
+            ```
+            ${{ steps.find_todos.outputs.todos }}
+            ```
+
+

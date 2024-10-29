@@ -19,14 +19,35 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
+      # - name: Get the list of TODOs from the diff
+      #   id: find_todos
+      #   run: |
+      #     git fetch origin ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
+      #     DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }})
+      #     TODOS=$(echo "$DIFF" | grep -E '^\+.*TODO:' || true)
+      #     if [ -n "$TODOS" ]; then
+      #       echo "todos=$TODOS" >> $GITHUB_ENV
+      #     fi
+
       - name: Get the list of TODOs from the diff
         id: find_todos
         run: |
+          echo "Fetching base and head refs..."
           git fetch origin ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
+
+          echo "Generating diff between base and head:"
           DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }})
-          TODOS=$(echo "$DIFF" | grep -E '^\+.*TODO:' || true)
+          echo "$DIFF" # Print the diff to confirm its content
+
+          echo "Searching for TODOs in the diff..."
+          TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
+
           if [ -n "$TODOS" ]; then
+            echo "Found TODOs:"
+            echo "$TODOS" # Log found TODOs for debugging
             echo "todos=$TODOS" >> $GITHUB_ENV
+          else
+            echo "No TODOs found."
           fi
 
       - name: Debug PR Number

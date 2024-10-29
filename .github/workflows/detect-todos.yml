@@ -30,14 +30,15 @@ jobs:
           fi
 
       - name: Debug PR Number
-        run: echo "PR Number: ${{ github.event.pull_request.number }}"
+        run: |
+          echo "PR Number: ${{ github.event.pull_request.number }}"
 
       - name: Debug TODOs Output
         run: |
           echo "TODOs: ${{ env.todos }}"
 
       - name: Comment on the PR if TODOs are found
-        if: env.todos != ''
+        if: ${{ env.todos != '' }}
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

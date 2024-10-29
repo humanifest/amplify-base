@@ -36,6 +36,9 @@ jobs:
       - name: Debug TODOs Output
         run: |
           echo "TODOs: ${{ env.todos }}"
+          if [ -z "${{ env.todos }}" ]; then
+            echo "No TODOs detected."
+          fi
 
       - name: Comment on the PR if TODOs are found
         if: ${{ env.todos != '' }}

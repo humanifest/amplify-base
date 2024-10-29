@@ -26,7 +26,7 @@ jobs:
           DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }})
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
           if [ -n "$TODOS" ]; then
-            echo "::set-output name=todos::$TODOS"
+            echo "todos=$TODOS" >> $GITHUB_ENV
           fi
 
       - name: Debug PR Number
@@ -34,10 +34,10 @@ jobs:
 
       - name: Debug TODOs Output
         run: |
-          echo "TODOs: ${{ steps.find_todos.outputs.todos }}"
+          echo "TODOs: ${{ env.todos }}"
         
       - name: Comment on the PR if TODOs are found
-        if: steps.find_todos.outputs.todos != ''
+        if: env.todos != ''
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -45,5 +45,5 @@ jobs:
           body: |
             ⚠️ **New TODOs detected in this PR:**
             ```
-            ${{ steps.find_todos.outputs.todos }}
-            ```
+            ${{ env.todos }}
+ 

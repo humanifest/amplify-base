@@ -43,7 +43,7 @@ jobs:
           HEAD=${{ github.event.pull_request.head.ref }}
 
           echo "Generating diff between $BASE and $HEAD..."
-          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!path/to/file_to_exclude.js' || true)
+          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' || true)
 
           echo "Extracting TODOs..."
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)

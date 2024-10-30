@@ -23,8 +23,10 @@ jobs:
       - name: Checkout the PR code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0 # Fetch all history to avoid shallow clone issues
+        # with:
+        #   ref: ${{ github.event.pull_request.head.ref }}
+        #   repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Show branch history
         run: |
@@ -43,7 +45,7 @@ jobs:
           HEAD=${{ github.event.pull_request.head.ref }}
 
           echo "Generating diff between $BASE and $HEAD..."
-          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' > diff.txt || true)
+          DIFF=$(git diff origin/$BASE..origin/$HEAD || true)
 
           echo "Extracting TODOs..."
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
@@ -63,6 +65,18 @@ jobs:
         run: |
           echo "Content of todos.txt:"
           cat todos.txt || echo "No TODOs detected."
+
+      # - name: Comment on the PR if TODOs are found
+      #   if: ${{ env.todos != '' }}
+      #   uses: peter-evans/create-or-update-comment@v3
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     body: |
+      #       ⚠️ **New TODO detected in this PR:**
+      #       ```
+      #       ${{ env.todos }}
+      #       ```
 
       - name: Comment on Each TODO if Found
         if: ${{ env.todos != '' }}

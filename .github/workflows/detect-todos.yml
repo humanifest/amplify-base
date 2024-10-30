@@ -36,13 +36,17 @@ jobs:
           git fetch origin ${{ github.event.pull_request.base.ref }}
           git fetch origin ${{ github.event.pull_request.head.ref }}
 
-      - name: Generate Diff and Extract TODOs
-        id: find_todos
+      - name: Generate Diff
         run: |
           BASE=${{ github.event.pull_request.base.ref }}
           HEAD=${{ github.event.pull_request.head.ref }}
 
           echo "Generating diff between $BASE and $HEAD..."
+          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' || true)
+
+      - name: Generate Diff and Extract TODOs
+        id: find_todos
+        run: |
           DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' || true)
 
           echo "Extracting TODOs..."

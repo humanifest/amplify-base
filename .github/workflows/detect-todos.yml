@@ -48,6 +48,7 @@ jobs:
         id: find_todos
         run: |
           grep -nE '^\+.*// TODO:' diff.txt > todos_with_metadata.txt || true
+          echo "$TODOS" > todos.txt
 
           if [ -s todos_with_metadata.txt ]; then
             echo "Found TODOs with metadata:"

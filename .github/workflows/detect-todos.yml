@@ -69,12 +69,26 @@ jobs:
             echo "No TODOs detected."
           fi
 
-      - name: Comment on Each TODO if Found
+      - name: Comment on the PR if TODOs are found
         if: ${{ env.todos != '' }}
-        run: |
-          while IFS= read -r todo; do
-            if [ -n "$todo" ]; then
-              echo "Commenting TODO: $todo"
-              gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected in this PR:** \n```\n$todo\n```"
-            fi
-          done < todos.txt
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            while IFS= read -r todo; do
+              if [ -n "$todo" ]; then
+                echo "Commenting TODO: $todo"
+                gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected in this PR:** \n```\n$todo\n```"
+              fi
+            done < todos.txt
+
+        # - name: Comment on Each TODO if Found
+        # if: ${{ env.todos != '' }}
+        # run: |
+        #   while IFS= read -r todo; do
+        #     if [ -n "$todo" ]; then
+        #       echo "Commenting TODO: $todo"
+        #       gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected in this PR:** \n```\n$todo\n```"
+        #     fi
+        #   done < todos.txt

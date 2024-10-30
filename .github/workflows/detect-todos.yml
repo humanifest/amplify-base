@@ -87,6 +87,6 @@ jobs:
             if [ -n "$todo" ]; then
               echo "Commenting TODO: $todo"
               gh pr comment ${{ github.event.pull_request.number }} \
-                --body "⚠️ **New TODO detected in this PR:**\n\`\`\`\n$todo\n\`\`\`"
+                --body $'⚠️ **New TODO detected in this PR:**\n```\n'"$todo"$'\n```'
             fi
           done < todos.txt

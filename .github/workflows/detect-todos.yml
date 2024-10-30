@@ -38,24 +38,23 @@ jobs:
           git fetch origin ${{ github.event.pull_request.base.ref }}
           git fetch origin ${{ github.event.pull_request.head.ref }}
 
-      - name: Generate Diff
-        run: |
-          DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}..origin/${{ github.event.pull_request.head.ref }} || true)
-          echo "$DIFF"
-
-      - name: Get the list of TODOs from the diff
+      - name: Generate Diff and Extract TODOs
         id: find_todos
         run: |
           BASE=${{ github.event.pull_request.base.ref }}
           HEAD=${{ github.event.pull_request.head.ref }}
+
+          echo "Generating diff between $BASE and $HEAD..."
           DIFF=$(git diff origin/$BASE..origin/$HEAD || true)
-          echo "$DIFF"
+
+          echo "Extracting TODOs..."
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
+
           if [ -n "$TODOS" ]; then
-            echo "Encoded TODOs:"
-            echo "$TODOS" | base64 > todos.txt
-            cat todos.txt
-            echo "todos=$(cat todos.txt)" >> $GITHUB_ENV
+            echo "$TODOS" > todos.txt
+            echo "todos=true" >> $GITHUB_ENV
+          else
+            echo "No TODOs found."
           fi
 
       - name: Debug PR Number
@@ -64,10 +63,8 @@ jobs:
 
       - name: Debug TODOs Output
         run: |
-          echo "TODOs: ${{ env.todos }}"
-          if [ -z "${{ env.todos }}" ]; then
-            echo "No TODOs detected."
-          fi
+          echo "Content of todos.txt:"
+          cat todos.txt || echo "No TODOs detected."
 
       # - name: Comment on the PR if TODOs are found
       #   if: ${{ env.todos != '' }}

@@ -36,23 +36,26 @@ jobs:
           git fetch origin ${{ github.event.pull_request.base.ref }}
           git fetch origin ${{ github.event.pull_request.head.ref }}
 
-      - name: Generate Diff and Extract TODOs
-        id: find_todos
+      - name: Generate Diff
         run: |
           BASE=${{ github.event.pull_request.base.ref }}
           HEAD=${{ github.event.pull_request.head.ref }}
 
           echo "Generating diff between $BASE and $HEAD..."
-          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' || true)
+          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' > diff.txt || true)
 
-          echo "Extracting TODOs..."
-          TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
+      - name: Get the list of TODOs with File and Line Numbers
+        id: find_todos
+        run: |
+          grep -nE '^\+.*// TODO:' diff.txt > todos_with_metadata.txt || true
 
-          if [ -n "$TODOS" ]; then
-            echo "$TODOS" > todos.txt
+          if [ -s todos_with_metadata.txt ]; then
+            echo "Found TODOs with metadata:"
+            cat todos_with_metadata.txt
+
             echo "todos=true" >> $GITHUB_ENV
           else
-            echo "No TODOs found."
+            echo "todos=false" >> $GITHUB_ENV
           fi
 
       - name: Debug PR Number

@@ -22,11 +22,11 @@ jobs:
     steps:
       - name: Checkout the PR code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Fetch all history to avoid shallow clone issues
         # with:
-        #   ref: ${{ github.event.pull_request.head.ref }}
-        #   repository: ${{ github.event.pull_request.head.repo.full_name }}
+        # fetch-depth: 0 # Fetch all history to avoid shallow clone issues
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Show branch history
         run: |
@@ -52,7 +52,9 @@ jobs:
           echo "$DIFF"
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
           if [ -n "$TODOS" ]; then
-            echo "$TODOS" > todos.txt
+            echo "Encoded TODOs:"
+            echo "$TODOS" | base64 > todos.txt
+            cat todos.txt
             echo "todos=$(cat todos.txt)" >> $GITHUB_ENV
           fi
 

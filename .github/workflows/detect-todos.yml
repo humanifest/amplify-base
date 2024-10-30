@@ -47,17 +47,15 @@ jobs:
       - name: Get the list of TODOs with File and Line Numbers
         id: find_todos
         run: |
-          grep -nE '^\+.*// TODO:' diff.txt > todos_with_metadata.txt || true
-          TODOS=$(echo "$DIFF" | grep -nE '^\+.*// TODO:' diff.txt > todos_with_metadata.txt || true)
-          echo "$TODOS" > todos.txt
 
-          if [ -s todos_with_metadata.txt ]; then
-            echo "Found TODOs with metadata:"
-            cat todos_with_metadata.txt
+          echo "Extracting TODOs..."
+          TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
 
+          if [ -n "$TODOS" ]; then
+            echo "$TODOS" > todos.txt
             echo "todos=true" >> $GITHUB_ENV
           else
-            echo "todos=false" >> $GITHUB_ENV
+            echo "No TODOs found."
           fi
 
       - name: Debug PR Number

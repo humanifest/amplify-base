@@ -26,15 +26,35 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-        - name: Generate Diff
+      - name: Show branch history
+        run: |
+          git log --oneline origin/main || echo "No main branch history."
+          git log --oneline origin/dev || echo "No dev branch history."
+
+      - name: Fetch Branches Properly
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          git fetch origin ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate Diff and Extract TODOs
+        id: find_todos
         run: |
           BASE=${{ github.event.pull_request.base.ref }}
           HEAD=${{ github.event.pull_request.head.ref }}
-          git diff origin/$BASE..origin/$HEAD -- . ':!path/to/file_to_exclude.js' > diff.txt || true
 
-      - name: Get the list of TODOs with File and Line Numbers
-        id: find_todos
-        run: |
+          echo "Generating diff between $BASE and $HEAD..."
+          DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' || true)
+
+          echo "Extracting TODOs..."
+          TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)
+
+          if [ -n "$TODOS" ]; then
+            echo "$TODOS" > todos.txt
+            echo "todos=true" >> $GITHUB_ENV
+          else
+            echo "No TODOs found."
+          fi
+
           grep -nE '^\+.*// TODO:' diff.txt > todos_with_metadata.txt || true
 
           if [ -s todos_with_metadata.txt ]; then
@@ -46,6 +66,27 @@ jobs:
             echo "todos=false" >> $GITHUB_ENV
           fi
 
+      - name: Debug PR Number
+        run: |
+          echo "PR Number: ${{ github.event.pull_request.number }}"
+
+      - name: Debug TODOs Output
+        run: |
+          echo "Content of todos.txt:"
+          cat todos.txt || echo "No TODOs detected."
+
+      # - name: Comment on Each TODO if Found
+      #   if: ${{ env.todos != '' }}
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     while IFS= read -r todo; do
+      #       if [ -n "$todo" ]; then
+      #         echo "Commenting TODO: $todo"
+      #         gh pr comment ${{ github.event.pull_request.number }} \
+      #           --body $'⚠️ **New TODO detected in this PR:**\n```\n'"$todo"$'\n```'
+      #       fi
+      #     done < todos.txt
       - name: Comment on Each TODO with File and Line Info
         if: ${{ env.todos == 'true' }}
         run: |
@@ -65,4 +106,3 @@ jobs:
               \`\`\`"
             fi
           done < todos_with_metadata.txt
-  

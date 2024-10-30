@@ -22,11 +22,11 @@ jobs:
     steps:
       - name: Checkout the PR code
         uses: actions/checkout@v3
-        # with:
-        # fetch-depth: 0 # Fetch all history to avoid shallow clone issues
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0 # Fetch all history to avoid shallow clone issues
+        # with:
+        #   ref: ${{ github.event.pull_request.head.ref }}
+        #   repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Show branch history
         run: |
@@ -69,12 +69,14 @@ jobs:
             echo "No TODOs detected."
           fi
 
-      - name: Comment on Each TODO if Found
+      - name: Comment on the PR if TODOs are found
         if: ${{ env.todos != '' }}
-        run: |
-          while IFS= read -r todo; do
-            if [ -n "$todo" ]; then
-              echo "Commenting TODO: $todo"
-              gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected in this PR:** \n```\n$todo\n```"
-            fi
-          done < todos.txt
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ⚠️ **New TODOs detected in this PR:**
+            ```
+            ${{ env.todos }}
+            ```

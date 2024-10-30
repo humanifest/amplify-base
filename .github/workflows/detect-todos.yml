@@ -36,17 +36,14 @@ jobs:
           git fetch origin ${{ github.event.pull_request.base.ref }}
           git fetch origin ${{ github.event.pull_request.head.ref }}
 
-      - name: Generate Diff
+      - name: Generate Diff and Extract TODOs
+        id: find_todos
         run: |
           BASE=${{ github.event.pull_request.base.ref }}
           HEAD=${{ github.event.pull_request.head.ref }}
 
           echo "Generating diff between $BASE and $HEAD..."
           DIFF=$(git diff origin/$BASE..origin/$HEAD -- . ':!.github/workflows/detect-todos.yml' > diff.txt || true)
-
-      - name: Get the list of TODOs with File and Line Numbers
-        id: find_todos
-        run: |
 
           echo "Extracting TODOs..."
           TODOS=$(echo "$DIFF" | grep -E '^\+.*// TODO:' || true)

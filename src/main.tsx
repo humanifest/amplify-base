@@ -10,7 +10,6 @@ Amplify.configure(outputs);
 const root = document?.getElementById("root") as HTMLElement;
 const title = document?.getElementById("appTitle");
 const icon = document?.getElementById("appFavicon") as HTMLAnchorElement;
-// TODO: test
 
 if (root && title && icon) {
   createRoot(root).render(
@@ -22,7 +21,5 @@ if (root && title && icon) {
   title.innerHTML = APP_TITLE;
   icon.href = FAV_ICON_URL;
 } else {
-  // TODO: alert sentry
-
   throw new Error("React Root does not exist, please load HTML first.");
 }

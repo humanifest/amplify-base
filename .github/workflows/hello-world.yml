@@ -11,7 +11,8 @@ permissions:
 jobs:
   hello_world:
     runs-on: ubuntu-latest
-
+    # Runs only if 'run-sanity' label is applied
+    if: contains(github.event.pull_request.labels.*.name, 'run-sanity')
     steps:
       - name: Print Hello World
         env:

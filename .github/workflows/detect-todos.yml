@@ -88,7 +88,10 @@ jobs:
       #       fi
       #     done < todos.txt
       - name: Comment on Each TODO with File and Line Info
-        if: ${{ env.todos == 'true' }}
+        if:
+          ${{ env.todos == 'true' }}
+          #   env:
+        #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           while IFS= read -r todo; do
             if [[ "$todo" =~ ^([0-9]+):(\+.*)(// TODO:.*)$ ]]; then

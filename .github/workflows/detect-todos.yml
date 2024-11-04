@@ -9,13 +9,6 @@ permissions:
   issues: write
 
 jobs:
-  # hello_world:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Print Hello World
-  #       run: echo "Hello, World!"
-
   detect_todos:
     runs-on: ubuntu-latest
 
@@ -25,11 +18,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-
-      # - name: Show branch history
-      #   run: |
-      #     git log --oneline origin/main || echo "No main branch history."
-      #     git log --oneline origin/dev || echo "No dev branch history."
 
       - name: Fetch Branches Properly
         run: |
@@ -45,7 +33,8 @@ jobs:
       - name: Get the list of TODOs with File and Line Numbers
         id: find_todos
         run: |
-          grep -nE '^\+.*// TODO:' diff.txt > todos_with_metadata.txt || true
+          awk '/^diff --git a\// {file = $3; sub(/^a\//, "", file)} 
+               /^[+].*\/\/ TODO:/ {print file ":" NR ":" $0}' diff.txt > todos_with_metadata.txt || true
 
           if [ -s todos_with_metadata.txt ]; then
             echo "Found TODOs with metadata:"
@@ -56,46 +45,24 @@ jobs:
             echo "todos=false" >> $GITHUB_ENV
           fi
 
-      # - name: Debug PR Number
-      #   run: |
-      #     echo "PR Number: ${{ github.event.pull_request.number }}"
-
-      # - name: Debug TODOs Output
-      #   run: |
-      #     echo "Content of todos.txt:"
-      #     cat todos.txt || echo "No TODOs detected."
-
-      # - name: Comment on Each TODO if Found
-      #   if: ${{ env.todos != '' }}
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     while IFS= read -r todo; do
-      #       if [ -n "$todo" ]; then
-      #         echo "Commenting TODO: $todo"
-      #         gh pr comment ${{ github.event.pull_request.number }} \
-      #           --body $'⚠️ **New TODO detected in this PR:**\n```\n'"$todo"$'\n```'
-      #       fi
-      #     done < todos.txt
-
       - name: Comment on Each TODO with File and Line Info
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ env.todos == 'true' }}
         run: |
           while IFS= read -r todo; do
-            if [[ "$todo" =~ ^([0-9]+):(\+.*)(// TODO:.*)$ ]]; then
-              line_number="${BASH_REMATCH[1]}"
-              content="${BASH_REMATCH[3]}"
-              echo "TODO found on line $line_number: $content"
+            # Split the todo entry into file, line number, and content
+            file=$(echo "$todo" | cut -d ':' -f 1)
+            line_number=$(echo "$todo" | cut -d ':' -f 2)
+            content=$(echo "$todo" | cut -d ':' -f 3-)
 
-              file=$(grep -B 100 "$content" diff.txt | head -n 1 | sed 's/^diff --git a\///g' | awk '{print $1}')
-              
-              gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected**:
-              **File:** \`${file}\`  
-              **Line:** \`${line_number}\`  
-              \`\`\`
-              $content
-              \`\`\`"
-            fi
+            echo "TODO found in $file on line $line_number: $content"
+
+            # Post the comment to the PR
+            gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected**:
+            **File:** \`${file}\`  
+            **Line:** \`${line_number}\`  
+            \`\`\`
+            $content
+            \`\`\`"
           done < todos_with_metadata.txt

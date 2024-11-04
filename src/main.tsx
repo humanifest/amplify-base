@@ -20,7 +20,6 @@ if (root && title && icon) {
 
   title.innerHTML = APP_TITLE;
   icon.href = FAV_ICON_URL;
-  // TODO: alert sentry
 } else {
   throw new Error("React Root does not exist, please load HTML first.");
 }

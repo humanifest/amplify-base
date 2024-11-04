@@ -29,7 +29,6 @@ export default class ErrorBoundaryProvider extends Component<
     // NOTE: this doesn't catch setTimeout()
     console.error(_);
     return {
-      // TODO: Alert Sentry
       hasError: true,
     };
   }

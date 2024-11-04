@@ -9,13 +9,6 @@ permissions:
   issues: write
 
 jobs:
-  hello_world:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Print Hello World
-        run: echo "Hello, World!"
-
   detect_todos:
     runs-on: ubuntu-latest
 
@@ -26,35 +19,50 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-      - name: Get the list of TODOs from the diff
+      - name: Fetch Branches Properly
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          git fetch origin ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate Diff
+        run: |
+          BASE=${{ github.event.pull_request.base.ref }}
+          HEAD=${{ github.event.pull_request.head.ref }}
+          git diff origin/$BASE..origin/$HEAD -- . ':!path/to/file_to_exclude.js' > diff.txt || true
+
+      - name: Get the list of TODOs with File and Line Numbers
         id: find_todos
         run: |
-          git fetch origin ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
-          DIFF=$(git diff origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }})
-          TODOS=$(echo "$DIFF" | grep -E '^\+.*TODO:' || true)
-          if [ -n "$TODOS" ]; then
-            echo "todos=$TODOS" >> $GITHUB_ENV
+          awk '/^diff --git a\// {file = $3; sub(/^a\//, "", file)} 
+               /^[+].*\/\/ TODO:/ {print file ":" NR ":" $0}' diff.txt > todos_with_metadata.txt || true
+
+          if [ -s todos_with_metadata.txt ]; then
+            echo "Found TODOs with metadata:"
+            cat todos_with_metadata.txt
+
+            echo "todos=true" >> $GITHUB_ENV
+          else
+            echo "todos=false" >> $GITHUB_ENV
           fi
 
-      - name: Debug PR Number
+      - name: Comment on Each TODO with File and Line Info
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ env.todos == 'true' }}
         run: |
-          echo "PR Number: ${{ github.event.pull_request.number }}"
+          while IFS= read -r todo; do
+            # Split the todo entry into file, line number, and content
+            file=$(echo "$todo" | cut -d ':' -f 1)
+            line_number=$(echo "$todo" | cut -d ':' -f 2)
+            content=$(echo "$todo" | cut -d ':' -f 3-)
 
-      - name: Debug TODOs Output
-        run: |
-          echo "TODOs: ${{ env.todos }}"
-          if [ -z "${{ env.todos }}" ]; then
-            echo "No TODOs detected."
-          fi
+            echo "TODO found in $file on line $line_number: $content"
 
-      - name: Comment on the PR if TODOs are found
-        if: ${{ env.todos != '' }}
-        uses: peter-evans/create-or-update-comment@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ⚠️ **New TODOs detected in this PR:**
-            ```
-            ${{ env.todos }}
-            ```
+            # Post the comment to the PR
+            gh pr comment ${{ github.event.pull_request.number }} --body "⚠️ **New TODO detected**:
+            **File:** \`${file}\`  
+            **Line:** \`${line_number}\`  
+            \`\`\`
+            $content
+            \`\`\`"
+          done < todos_with_metadata.txt

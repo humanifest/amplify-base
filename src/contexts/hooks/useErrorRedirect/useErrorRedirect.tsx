@@ -15,7 +15,6 @@ export default function useErrorRedirect() {
 
   useEffect(() => {
     if (hasError) {
-      // TODO: alert sentry
       console.error(hasError);
 
       if (!showDevOpts) {

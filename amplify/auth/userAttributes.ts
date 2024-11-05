@@ -1,5 +1,7 @@
 //  NOTE: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html
 
+import { UserAttributes } from "aws-cdk-lib/aws-iam";
+
 type AttributeObject = {
   [key: string]: {
     order: number;
@@ -9,7 +11,7 @@ type AttributeObject = {
 };
 
 const immutable = ["email"]; // List of immutable attributes
-const required = ["given_name", "family_name", "email"];
+const required = ["givenName", "familyName", "email"];
 
 function createdAttributes(attributes: string[]): AttributeObject {
   return attributes.reduce((result, attribute, index) => {
@@ -23,10 +25,10 @@ function createdAttributes(attributes: string[]): AttributeObject {
 }
 
 export const attributes = [
-  "given_name",
+  "givenName",
   "nickname",
-  "middle_name",
-  "family_name",
+  "middleName",
+  "familyName",
   "email",
   "phone_number",
   "profile",
@@ -37,4 +39,4 @@ export const attributes = [
   "address",
 ];
 
-export default createdAttributes(attributes);
+export default createdAttributes(attributes) as Partial<UserAttributes>;

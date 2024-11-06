@@ -1,29 +1,42 @@
-const userAttributes = {
-  givenName: { order: 1, required: true, mutable: true },
-  familyName: { order: 2, required: true, mutable: true },
-  email: { order: 3, required: true },
-  phoneNumber: { order: 4, required: false },
+//  NOTE: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html
+
+import { UserAttributes } from "aws-cdk-lib/aws-iam";
+
+type AttributeObject = {
+  [key: string]: {
+    order: number;
+    required: boolean;
+    mutable: boolean;
+  };
 };
 
-export const extendedUserAttributeOptions = [
-  "name",
-  "family_name",
-  "given_name",
-  "middle_name",
+const immutable = ["email"]; // List of immutable attributes
+const required = ["givenName", "familyName", "email"];
+
+function createdAttributes(attributes: string[]): AttributeObject {
+  return attributes.reduce((result, attribute, index) => {
+    result[attribute] = {
+      order: index + 1,
+      required: required.includes(attribute),
+      mutable: !immutable.includes(attribute), // Set mutable to false if in immutable array
+    };
+    return result;
+  }, {} as AttributeObject);
+}
+
+export const attributes = [
+  "givenName",
   "nickname",
-  "preferred_username",
+  "middleName",
+  "familyName",
+  "email",
+  "phone_number",
   "profile",
   "picture",
   "website",
   "gender",
   "birthdate",
-  "zoneinfo",
-  "locale",
-  "updated_at",
   "address",
-  "email",
-  "phone_number",
-  "sub",
 ];
 
-export default userAttributes;
+export default createdAttributes(attributes) as Partial<UserAttributes>;

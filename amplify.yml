@@ -9,15 +9,11 @@ test:
         - npm install mocha mochawesome
         - npm install mochawesome-merge
         - npm install -g mochawesome-report-generator
-        # - npm install -g ts-node
-
-        # - npx tsc cypress/cognito-setup.ts --outDir cypress/dist
 
         # Run the Cognito user management script with ts-node
         - echo "Running Cognito User Setup Script..."
-        # - ts-node cypress/cognito-setup.ts || { echo "Cognito setup failed!
-        # Exiting..."; exit 1; }
-        - node amplify/cognito-setup.mjs || { echo "Cognito setup failed!
+
+        - node amplify/cicd/cognito-setup.mjs || { echo "Cognito setup failed!
           Exiting..."; exit 1; }
 
         # Start the frontend server

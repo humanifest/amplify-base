@@ -1,6 +1,6 @@
 import { Amplify } from "aws-amplify";
-import amplifyOutputs from "../amplify_outputs.json" assert { type: "json" };
-import { AtgCognito, TestCredential } from "./atg-cognito";
+import amplifyOutputs from "../../amplify_outputs.json" assert { type: "json" };
+import { AtgCognito } from "./atg-cognito.mjs";
 // import { ExplicitAuthFlowsType } from '@aws-sdk/client-cognito-identity-provider';
 
 // Configure Amplify with the outputs
@@ -8,9 +8,8 @@ Amplify.configure(amplifyOutputs);
 
 const atgCognito = new AtgCognito(amplifyOutputs);
 
-const testCredentials = await atgCognito.readCredentialsFile(
-  "./auth/.atg.tester.json"
-);
+const testCredentials =
+  await atgCognito.readCredentialsFile(".atg.tester.json");
 
 async function setupCognitoUsers() {
   if (testCredentials.length != 0) {

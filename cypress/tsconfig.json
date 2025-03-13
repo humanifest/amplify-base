@@ -3,7 +3,9 @@
   "include": [
     "../amplify/auth/.atg.tester.json",
     "./**/*.ts",
-    "../cypress.d.ts"
+    "../cypress.d.ts",
+    "atg-cognito.js",
+    "cognito-setup.js"
   ],
   "exclude": [],
   "compilerOptions": {

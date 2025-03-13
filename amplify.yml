@@ -17,7 +17,7 @@ test:
         - echo "Running Cognito User Setup Script..."
         # - ts-node cypress/cognito-setup.ts || { echo "Cognito setup failed!
         # Exiting..."; exit 1; }
-        - node cypress/cognito-setup.js || { echo "Cognito setup failed!
+        - node amplify/cognito-setup.mjs || { echo "Cognito setup failed!
           Exiting..."; exit 1; }
 
         # Start the frontend server
@@ -41,6 +41,11 @@ test:
       - "**/*.mp4"
 backend:
   phases:
+    preBuild:
+      commands:
+        - nvm use || nvm install
+        - node -v
+        - npm ci --verbose
     build:
       commands:
         - npm ci --cache .npm --prefer-offline

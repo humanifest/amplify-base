@@ -8,40 +8,40 @@ export default function Sections() {
   return (
     <>
       <section className="bg-gray-200 py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center">Our Services</h2>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="text-center text-3xl font-bold">Our Services</h2>
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="rounded-lg bg-white p-6 shadow-lg transition duration-300 hover:shadow-xl">
               <img
                 src={aiSolutions}
                 alt="AI Solutions"
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="mb-4 h-48 w-full rounded-lg object-cover"
               />
-              <h3 className="text-2xl font-bold mb-2">Intelligent Solutions</h3>
+              <h3 className="mb-2 text-2xl font-bold">Intelligent Solutions</h3>
               <p className="text-lg">
                 Harness the power of artificial intelligence to drive innovation
                 and efficiency in your business processes.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+            <div className="rounded-lg bg-white p-6 shadow-lg transition duration-300 hover:shadow-xl">
               <img
                 src={softwareDevelopment}
                 alt="Software Development"
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="mb-4 h-48 w-full rounded-lg object-cover"
               />
-              <h3 className="text-2xl font-bold mb-2">Software Development</h3>
+              <h3 className="mb-2 text-2xl font-bold">Software Development</h3>
               <p className="text-lg">
                 Custom software development services tailored to meet your
                 specific business needs and objectives.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+            <div className="rounded-lg bg-white p-6 shadow-lg transition duration-300 hover:shadow-xl">
               <img
                 src={itConsulting}
                 alt="IT Consulting"
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="mb-4 h-48 w-full rounded-lg object-cover"
               />
-              <h3 className="text-2xl font-bold mb-2">
+              <h3 className="mb-2 text-2xl font-bold">
                 Information Technology
               </h3>
               <p className="text-lg">
@@ -53,34 +53,31 @@ export default function Sections() {
         </div>
       </section>
       <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="text-center text-3xl font-bold">
             Expertise and Excellence
           </h2>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="flex flex-col items-center">
               <img
                 src={expertise}
                 alt="Expertise"
-                className="w-full h-64 object-cover rounded-lg mb-4 shadow-lg"
+                className="mb-4 h-64 w-full rounded-lg object-cover shadow-lg"
               />
-              <h3 className="text-2xl font-bold mb-2">Industry Knowledge: </h3>
-              <p className="text-lg text-center">
-                <div>
-                  Deep understanding of the cdivent’s industry and specific
-                  business challenges.
-                </div>
-                <div></div>
+              <h3 className="mb-2 text-2xl font-bold">Industry Knowledge:</h3>
+              <p className="text-center text-lg">
+                Deep understanding of the client’s industry and specific
+                business challenges.
               </p>
             </div>
             <div className="flex flex-col items-center">
               <img
                 src={technicalExpertise}
-                alt="technicalExpertise"
-                className="w-full h-64 object-cover rounded-lg mb-4 shadow-lg"
+                alt="Technical Expertise"
+                className="mb-4 h-64 w-full rounded-lg object-cover shadow-lg"
               />
-              <h3 className="text-2xl font-bold mb-2">Technical Expertise: </h3>
-              <p className="text-lg text-center">
+              <h3 className="mb-2 text-2xl font-bold">Technical Expertise:</h3>
+              <p className="text-center text-lg">
                 Advanced skills and knowledge in relevant technologies,
                 methodologies, or practices.
               </p>

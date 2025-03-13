@@ -9,6 +9,13 @@ test:
         - npm install mocha mochawesome --verbose
         - npm install mochawesome-merge --verbose
         - npm install -g mochawesome-report-generator --verbose
+
+        # Run the Cognito user management script before starting tests
+        - echo "Running Cognito User Setup Script..."
+        - node cypress/cognito-setup.ts.ts || { echo "Cognito setup failed!
+          Exiting..."; exit 1; }
+
+        # Start the frontend server
         - pm2 start npm -- run dev
         - wait-on http://localhost:5173
     test:

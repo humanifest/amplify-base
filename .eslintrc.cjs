@@ -5,6 +5,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
   ],
   ignorePatterns: [
     "dist",
@@ -15,7 +16,7 @@ module.exports = {
     "cypress",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "tailwindcss"],
   rules: {
     "react-refresh/only-export-components": [
       "warn",

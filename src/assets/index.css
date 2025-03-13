@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Cursive";
-  src: url("./fonts/Beau_Rivage/BeauRivage-Regular.ttf") format("truetype");
+  font-family: "Beau Rivage";
+  src: url("/fonts/Beau_Rivage/BeauRivage-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -20,7 +20,7 @@
 
 @layer utilities {
   .cursive {
-    font-family: "Cursive";
+    font-family: "Beau Rivage";
   }
 
   .transform3d {

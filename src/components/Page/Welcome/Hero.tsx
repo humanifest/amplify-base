@@ -5,11 +5,11 @@ export default function Hero() {
         {/* Dark overlay */}
       </div>
 
-      <div className="relative z-10 text-center text-white flex flex-col items-center justify-center h-full px-4">
-        <h1 className="text-5xl font-bold mb-4">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
+        <h1 className="mb-4 text-5xl font-bold">
           Transform Your Business with Expert Software Solutions
         </h1>
-        <p className="text-2xl mb-8">
+        <p className="mb-8 text-2xl">
           We provide cutting-edge software consulting services to help you
           achieve your business goals.
         </p>

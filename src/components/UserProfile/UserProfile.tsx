@@ -29,9 +29,7 @@ export default function UserProfile() {
   }, [auth, getProfile]);
 
   const handleDelete = async () => {
-    console.log("Doing some clean up...");
-    console.log("Done!");
-    // await Auth.deleteUser();
+    // TODO: await Auth.deleteUser();
   };
 
   return (
@@ -53,6 +51,9 @@ export default function UserProfile() {
           },
           avatar: {
             display: "none",
+            disabled: true,
+          },
+          balance: {
             disabled: true,
           },
         }}

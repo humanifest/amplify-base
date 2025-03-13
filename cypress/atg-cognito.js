@@ -9,17 +9,11 @@ import { signUp } from "aws-amplify/auth";
 
 import * as fs from "fs/promises";
 
-export interface TestCredential {
-  username: string;
-  password: string;
-  kind: string;
-}
-
 export class AtgCognito {
-  cognito: CognitoIdentityProviderClient;
-  amplifyOutputs: any;
+  cognito;
+  amplifyOutputs;
 
-  constructor(amplifyOutputs: any) {
+  constructor(amplifyOutputs) {
     this.amplifyOutputs = amplifyOutputs;
     this.cognito = new CognitoIdentityProviderClient({
       region: this.amplifyOutputs.auth.aws_region,
@@ -30,7 +24,7 @@ export class AtgCognito {
     );
   }
 
-  async createUser(username: string, password: string): Promise<String> {
+  async createUser(username, password) {
     const { isSignUpComplete, userId, nextStep } = await signUp({
       username: username,
       password: password,
@@ -48,7 +42,7 @@ export class AtgCognito {
     return String(userId);
   }
 
-  async deleteUser(username: string) {
+  async deleteUser(username) {
     const params = {
       UserPoolId: this.amplifyOutputs.auth.user_pool_id,
       Username: username,
@@ -63,7 +57,7 @@ export class AtgCognito {
       console.error("Error deleting user:", error);
     }
   }
-  async confirmUser(username: string) {
+  async confirmUser(username) {
     const params = {
       UserPoolId: this.amplifyOutputs.auth.user_pool_id,
       Username: username,
@@ -79,7 +73,7 @@ export class AtgCognito {
     }
   }
 
-  async verifyUserEmail(username: string) {
+  async verifyUserEmail(username) {
     const params = {
       UserPoolId: this.amplifyOutputs.auth.user_pool_id,
       Username: username,
@@ -101,11 +95,11 @@ export class AtgCognito {
     }
   }
 
-  async readCredentialsFile(filePath: string): Promise<TestCredential[]> {
+  async readCredentialsFile(filePath) {
     try {
       const fileContent = await fs.readFile(filePath, "utf-8");
-      return JSON.parse(fileContent) as TestCredential[];
-    } catch (error: any) {
+      return JSON.parse(fileContent);
+    } catch (error) {
       console.error(
         `Failed to read the credentials file. Error: ${error.message}`
       );

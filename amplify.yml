@@ -3,16 +3,21 @@ test:
   phases:
     preTest:
       commands:
-        - npm ci --verbose
-        - npm install -g pm2 --verbose
-        - npm install -g wait-on --verbose
-        - npm install mocha mochawesome --verbose
-        - npm install mochawesome-merge --verbose
-        - npm install -g mochawesome-report-generator --verbose
+        - npm ci
+        - npm install -g pm2
+        - npm install -g wait-on
+        - npm install mocha mochawesome
+        - npm install mochawesome-merge
+        - npm install -g mochawesome-report-generator
+        # - npm install -g ts-node
 
-        # Run the Cognito user management script before starting tests
+        # - npx tsc cypress/cognito-setup.ts --outDir cypress/dist
+
+        # Run the Cognito user management script with ts-node
         - echo "Running Cognito User Setup Script..."
-        - node cypress/cognito-setup.ts || { echo "Cognito setup failed!
+        # - ts-node cypress/cognito-setup.ts || { echo "Cognito setup failed!
+        # Exiting..."; exit 1; }
+        - node cypress/cognito-setup.js || { echo "Cognito setup failed!
           Exiting..."; exit 1; }
 
         # Start the frontend server

@@ -6,7 +6,7 @@ import { AtgCognito, TestCredential } from "./atg-cognito";
 // Configure Amplify with the outputs
 Amplify.configure(amplifyOutputs);
 
-const atgCognito: AtgCognito = new AtgCognito(amplifyOutputs);
+const atgCognito = new AtgCognito(amplifyOutputs);
 
 const testCredentials = await atgCognito.readCredentialsFile(
   "../amplify/auth/.atg.tester.json"
@@ -18,7 +18,7 @@ async function setupCognitoUsers() {
       console.log("✅", JSON.stringify(cred));
       // Just in case. You can safely ignore error here
       // TODO - fail silently? Some failures (e.g. token expired) suggest not.
-      let userId: String = "";
+      let userId = "";
       try {
         await atgCognito.deleteUser(cred.username);
         userId = await atgCognito.createUser(cred.username, cred.password);

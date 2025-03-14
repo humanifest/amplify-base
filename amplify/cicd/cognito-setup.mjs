@@ -1,17 +1,18 @@
 import { Amplify } from "aws-amplify";
 import amplifyOutputs from "../../amplify_outputs.json" assert { type: "json" };
 import { AtgCognito } from "./atg-cognito.mjs";
-import testCredentials from "./.atg.tester.json" assert { type: "json" };
+import testCredentialsData from "./.atg.tester.json" assert { type: "json" };
 
 // Configure Amplify with the outputs
 Amplify.configure(amplifyOutputs);
 
 const atgCognito = new AtgCognito(amplifyOutputs);
+const testCredentials = testCredentialsData.default;
 
 async function setupCognitoUsers() {
   if (testCredentials.length != 0) {
     for (const cred of testCredentials) {
-      console.log("✅", JSON.stringify(cred));
+      console.log("✅", testCredentialsData);
       // Just in case. You can safely ignore error here
       // TODO - fail silently? Some failures (e.g. token expired) suggest not.
 

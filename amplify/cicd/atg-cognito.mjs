@@ -32,7 +32,6 @@ export class AtgCognito {
         password,
         options: {
           userAttributes: {
-            // ✅ Fix: Use an object instead of an array
             email: username,
             given_name: givenName,
             family_name: familyName,
@@ -40,32 +39,17 @@ export class AtgCognito {
         },
       });
 
-      console.log(`✅  isSignUpComplete: ${JSON.stringify(isSignUpComplete)}`);
-      console.log(`✅  userId: ${JSON.stringify(userId)}`);
-      console.log(`✅  nextStep: ${JSON.stringify(nextStep)}`);
+      console.log(`🔑  isSignUpComplete: ${JSON.stringify(isSignUpComplete)}`);
+      console.log(`👤  userId: ${JSON.stringify(userId)}`);
+      console.log(`🔄  nextStep: ${JSON.stringify(nextStep)}`);
 
       return String(userId);
     } catch (error) {
-      console.error("❌ Error during user signup:", error);
+      console.error("🚨 Error during user signup:", error);
       throw error;
     }
   }
 
-  // async deleteUser(username) {
-  //   const params = {
-  //     UserPoolId: this.amplifyOutputs.auth.user_pool_id,
-  //     Username: username,
-  //   };
-
-  //   const command = new AdminDeleteUserCommand(params);
-
-  //   try {
-  //     await this.cognito.send(command);
-  //     console.log(`User ${username} has been deleted successfully.`);
-  //   } catch (error) {
-  //     console.error("Error deleting user:", error);
-  //   }
-  // }
   async deleteUser(username) {
     const params = {
       UserPoolId: this.amplifyOutputs.auth.user_pool_id,

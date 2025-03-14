@@ -7,7 +7,7 @@ import {
 
 import { signUp } from "aws-amplify/auth";
 
-import * as fs from "fs/promises";
+import { promises as fs } from "fs";
 
 export class AtgCognito {
   cognito;
@@ -26,13 +26,13 @@ export class AtgCognito {
 
   async createUser(username, password, givenName, familyName) {
     const { isSignUpComplete, userId, nextStep } = await signUp({
-      username: username,
-      password: password,
+      username,
+      password,
       options: {
         userAttributes: [
-          { Name: "email", Value: username },
-          { Name: "given_name", Value: givenName },
-          { Name: "family_name", Value: familyName },
+          { name: "email", value: username },
+          { name: "given_name", value: givenName },
+          { name: "family_name", value: familyName },
         ],
       },
     });

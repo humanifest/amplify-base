@@ -8,7 +8,6 @@ Amplify.configure(amplifyOutputs);
 const atgCognito = new AtgCognito(amplifyOutputs);
 
 async function setupCognitoUsers() {
-  // ✅ Use `readCredentialsFile` from AtgCognito
   const testCredentials = await atgCognito.readCredentialsFile(
     new URL("./.atg.tester.json", import.meta.url)
   );

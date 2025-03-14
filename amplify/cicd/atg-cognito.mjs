@@ -24,12 +24,12 @@ export class AtgCognito {
     );
   }
 
-  async createUser(username, password) {
+  async createUser(username, password, givenName, familyName) {
     const { isSignUpComplete, userId, nextStep } = await signUp({
       username: username,
       password: password,
       options: {
-        UserAttributes: [
+        userAttributes: [
           { Name: "email", Value: username },
           { Name: "given_name", Value: givenName },
           { Name: "family_name", Value: familyName },

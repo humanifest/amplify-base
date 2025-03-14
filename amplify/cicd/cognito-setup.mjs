@@ -14,10 +14,15 @@ async function setupCognitoUsers() {
       console.log("✅", JSON.stringify(cred));
       // Just in case. You can safely ignore error here
       // TODO - fail silently? Some failures (e.g. token expired) suggest not.
-      let userId = "";
+
       try {
         await atgCognito.deleteUser(cred.username);
-        userId = await atgCognito.createUser(cred.username, cred.password);
+        await atgCognito.createUser(
+          cred.username,
+          cred.password,
+          cred.givenName,
+          cred.familyName
+        );
         await atgCognito.verifyUserEmail(cred.username);
         await atgCognito.confirmUser(cred.username);
       } catch (error) {

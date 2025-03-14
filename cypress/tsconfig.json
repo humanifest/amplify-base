@@ -1,6 +1,12 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts", "../cypress.d.ts"],
+  "include": [
+    "../amplify/auth/.atg.tester.json",
+    "./**/*.ts",
+    "../cypress.d.ts",
+    "atg-cognito.js",
+    "cognito-setup.js"
+  ],
   "exclude": [],
   "compilerOptions": {
     "types": ["cypress", "@percy/cypress"],

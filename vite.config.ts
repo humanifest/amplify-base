@@ -16,6 +16,25 @@ const scopedName = "[hash:base64:5]";
 
 const buildConfig = {
   exclude: [resolve("./src/_DEV")],
+  rollupOptions: {
+    output: {
+      /**
+       * :NOTE: This function helps with code-splitting by creating separate chunks
+       * for dependencies from node_modules. Instead of bundling everything
+       * into a single large file, it splits vendor libraries into their own
+       * chunks, improving caching and reducing initial load time.
+       *
+       * Example:
+       * - If a module comes from "node_modules/react", it will be placed in a "react" chunk.
+       * - If a module comes from "node_modules/lodash", it will be placed in a "lodash" chunk.
+       */
+      manualChunks(id) {
+        if (id.includes("node_modules")) {
+          return id.toString().split("node_modules/")[1].split("/")[0];
+        }
+      },
+    },
+  },
 } as BuildOptions;
 
 // https://vitejs.dev/config/

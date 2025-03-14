@@ -67,9 +67,9 @@ export const AuthContext = createContext<AuthContextType>({
   logout: unsafePlaceholder,
 });
 
-interface AuthInnerProps extends PropsWithChildren {}
+// interface AuthInnerProps extends PropsWithChildren {}
 
-const ProviderAuthInner = ({ ...props }: AuthInnerProps) => {
+const ProviderAuthInner = ({ ...props }: PropsWithChildren) => {
   return <AuthContext.Provider value={useAuth()} {...props} />;
 };
 

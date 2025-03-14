@@ -39,7 +39,7 @@ backend:
   phases:
     preBuild:
       commands:
-        - nvm use || nvm install
+        - nvm install $(cat .nvmrc) && nvm use $(cat .nvmrc)
         - node -v
         - npm ci --verbose
     build:

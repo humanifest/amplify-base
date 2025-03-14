@@ -29,9 +29,11 @@ export class AtgCognito {
       username: username,
       password: password,
       options: {
-        userAttributes: {
-          email: username,
-        },
+        UserAttributes: [
+          { Name: "email", Value: username },
+          { Name: "given_name", Value: givenName },
+          { Name: "family_name", Value: familyName },
+        ],
       },
     });
 
